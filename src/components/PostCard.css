@@ -1,0 +1,92 @@
+.info .title {
+  font-size: 18px;
+  font-weight: 200;
+  color: white;
+  line-height: 15px;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.info .date {
+  font-size: 12px;
+  color: #adadad;
+  line-height: 30px;
+  margin-top: 5px;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.cart {
+  height: 350px;
+  width: 300px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  perspective: 600px;
+}
+.cart .front {
+  border-radius: 10px;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.cart .front {
+  transform: rotateY(0deg);
+  overflow: hidden;
+  z-index: 1;
+}
+.cart .front .top-pic {
+  height: 75%;
+  width: 100%;
+}
+.cart .front .top-pic img {
+  height: 100%;
+}
+.cart .front .avatar {
+  width: 30px;
+  height: 30px;
+  top: 93%;
+  right: 10%;
+  margin: -77px 0 0 -57px;
+  border-radius: 100%;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.8), 0 4px 5px rgba(107, 5, 0, 0.6),
+    0 0 50px 50px rgba(255, 255, 255, 0.25);
+  background-size: contain;
+  position: absolute;
+  z-index: 1;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cart .front .info-box {
+  height: 25%;
+  width: 100%;
+  position: absolute;
+  display: table;
+  left: 0;
+  bottom: 0;
+  /* background: rgba(200, 38, 29, 0.7); */
+  background: rgb(118 118 118 / 70%);
+  /* padding: 50px; */
+}
+.avatar .car,
+.avatar .bike {
+  transform: scale(1.5);
+}
+.cart .info {
+  display: table-cell;
+  height: 100%;
+  vertical-align: middle;
+}
+.cart.flip .front {
+  transform: rotateY(180deg);
+}
+.cart.flip .back {
+  transform: rotateY(360deg);
+}
