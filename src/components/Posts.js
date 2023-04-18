@@ -3,7 +3,7 @@ import Header from "./Header";
 import PostCard from "./PostCard";
 import Loading from "./Loading";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPosts } from "../redux/actions/PostActions";
+import { filterPostsAction } from "../redux/actions/PostActions";
 import Paginate from "./Paginate";
 import useDarkMode from "../hooks/dark-mode";
 
@@ -22,18 +22,20 @@ const Posts = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchPosts());
-  }, [dispatch]);
+    dispatch(filterPostsAction());
+  }, []);
 
-  const postPerPage = 8;
-  const totalPosts = posts.length;
+  // const postPerPage = 10;
+  // const totalPosts = posts.length;
 
-  const indexOfLastPost = currentPage * postPerPage;
-  const indexOfFirstPost = indexOfLastPost - postPerPage;
-  const filterPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  // const indexOfLastPost = currentPage * postPerPage;
+  // const indexOfFirstPost = indexOfLastPost - postPerPage;
+  // const filterPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  // {`col ${theme === "dark" ? "dark" : "light"}`}
+
 
   return (
-    <div className={`col ${theme === "dark" ? "dark" : "light"}`}>
+    <div className="col">
       <Header
         search={search}
         setSearch={setSearch}
@@ -45,18 +47,18 @@ const Posts = () => {
       ) : (
         <div className="home">
           <div className="posts">
-            {filterPosts.map((post) => (
+            {posts && posts.map((post) => (
               <PostCard key={post._id} post={post} />
             ))}
           </div>
-          {totalPosts > postPerPage && (
+          {/* {totalPosts > postPerPage && (
             <Paginate
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
               totalPosts={totalPosts}
               postPerPage={postPerPage}
             />
-          )}
+          )} */}
         </div>
       )}
     </div>

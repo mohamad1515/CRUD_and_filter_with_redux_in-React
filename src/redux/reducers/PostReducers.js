@@ -1,9 +1,14 @@
 import * as actions from '../constants/PostConstants';
 
+import { FilterPostsInputModel } from '../../models'
+let filterPostsInputModel = new FilterPostsInputModel()
+let filterPostsInputModelStr = JSON.stringify(filterPostsInputModel)
 const initialState = {
+	filterPostsInputModel: JSON.parse(filterPostsInputModelStr),
 	posts: [],
 	searchResults: [],
 	page: 1,
+	theme: window.localStorage.getItem('theme')
 };
 
 export const PostReducers = (state = initialState, action) => {
@@ -17,12 +22,13 @@ export const PostReducers = (state = initialState, action) => {
 			return {
 				...state,
 				loading: false,
-				posts: action.payload.data,
+				posts: action.payload,
 				searchResults: action.payload.data,
 			};
 		case actions.FETCH_POST_FAILED:
 			return {
 				...state,
+				post: [],
 				loading: false,
 				error: action.payload,
 			};
@@ -60,6 +66,24 @@ export const PostReducers = (state = initialState, action) => {
 				posts: action.payload,
 				page: 1
 			};
+		case actions.LOCAL_THEME:
+			return {
+				...state,
+				theme: action.payload,
+			};
+		case actions.SET_FILTER_POST_FIELD:
+			return {
+				...state,
+				filterPostsInputModel: {
+					...state.filterPostsInputModel,
+					[action.payload.name]: action.payload.value
+				}
+			}
+		case actions.CLEAR_FILTER_POST_FIELDS:
+			return {
+				...state,
+				filterPostsInputModel: JSON.parse(filterPostsInputModelStr)
+			}
 		default:
 			return state;
 	}

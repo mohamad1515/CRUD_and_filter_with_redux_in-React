@@ -47,29 +47,56 @@ input {
   border: none;
   outline: none;
 }
-hr {
+.rs-theme-dark hr {
   border-top: 1px solid #333 !important;
 }
+.rs-theme-dark header {
+  border-bottom: 1px solid #333;
+}
+
 /** START HEADER STYLE **/
 
 header {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  border-bottom: 1px solid #333;
+  justify-content: center;
+  flex-direction: column;
+  border-bottom: 1px solid #e5e5ea;
   width: auto;
-  min-height: 86.5px;
+  min-height: 112px;
+  overflow: hidden;
 }
 
-.head-left {
-  width: 70%;
+.head-top {
+  width: 100%;
   display: flex;
-  justify-content: space-around;
 }
-.head-right {
-  width: 30%;
+.top-left {
+  width: 82%;
+}
+.top-right {
+  width: 16%;
   display: flex;
   justify-content: space-evenly;
+}
+.head-bottom {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+  margin-top: 0;
+}
+.bottom-right {
+  width: 1%;
+  margin-right: 4%;
+}
+.bottom-left {
+  width: 99%;
+}
+.ml-10 {
+  margin-left: 10px;
+}
+.rs-picker-toggle-wrapper {
+  margin: 0 10px;
 }
 
 header .title h1 {
@@ -97,7 +124,7 @@ header .search {
   transform: scale(1.5);
   transition: all 1s ease-in-out;
 }
-.dark .page-item.active .page-link {
+.rs-theme-dark .page-item.active .page-link {
   background-color: #92211b;
 }
 .light .page-item.active .page-link {
@@ -156,16 +183,17 @@ header .search {
 } */
 /** END HEADER STYLE **/
 .col {
-  display: flex;
-  flex-direction: column;
   width: 100%;
+  padding: 0;
 }
 .posts {
   margin-top: 40px;
   margin-bottom: 40px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   grid-gap: 20px;
+  align-content: center;
+  justify-content: center;
 }
 
 .posts .post {
@@ -189,24 +217,22 @@ header .search {
 .toggleBtn button {
   z-index: 10;
   cursor: pointer;
-  border: 1px solid #252830;
+  /* border: 1px solid #252830; */
   border-radius: 50%;
   padding: 2px !important;
   transform: translateX(10px);
-  background-color: #252830 !important;
+  /* background-color: #252830 !important; */
   width: 23px;
   height: 23px;
   outline: none !important;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 }
-.col {
-  padding: 0;
-}
+
 .pagination {
   justify-content: center;
 }
-.dark .page-link,
-.dark .page-item.disabled .page-link {
+.rs-theme-dark .page-link,
+.rs-theme-dark .page-item.disabled .page-link {
   background-color: #252830;
 }
 .light .page-link,
@@ -218,14 +244,19 @@ header .search {
   color: #333;
   background-color: #eee !important;
 }
-.dark .page-link:hover {
+.rs-theme-dark .page-link:hover {
   background-color: #42454d !important;
 }
 .filterBtn {
-  background-color: #575757 !important;
   height: 36px !important;
+  width: 120px;
 }
-
+.rs-theme-dark .filterBtn {
+  background-color: #575757 !important;
+}
+.red {
+  color: red;
+}
 /** END POSTS STYLE **/
 
 @media screen and (max-width: 768px) {
@@ -254,13 +285,13 @@ header .search {
 }
 .sidebar nav {
   height: 100%;
-  background-color: #1e1f26;
+  /* background-color: #1e1f26; */
   border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
 }
 .rs-sidenav-item {
   font-size: 14px;
   font-weight: bold;
-  background-color: #1e1f26 !important;
+  /* background-color: #1e1f26 !important; */
   color: #fff;
 }
 .rs-sidenav-nav
@@ -273,9 +304,9 @@ header .search {
 }
 .dashboardIcon.rs-sidenav-item.rs-sidenav-item-active {
   padding-top: 30px;
-  color: #fff !important;
+  /* color: #fff !important; */
   padding-left: 40px;
-  padding-right: 50px;
+  /* padding-right: 50px; */
   padding-bottom: 35px;
 }
 .rs-sidenav.rs-sidenav-default.rs-sidenav-collapse-out .dashboardIcon p {
@@ -285,7 +316,7 @@ header .search {
   display: flex !important;
   justify-content: center;
   align-items: center;
-  padding-bottom: 15.5px;
+  padding-bottom: 0;
 }
 .rs-sidenav.rs-sidenav-default.rs-sidenav-collapse-out
   .dashboardIcon
@@ -297,11 +328,9 @@ header .search {
   margin-right: 10px;
   margin-left: 19px;
 }
-.dark .rs-sidenav-item:hover {
-  font-weight: bold !important;
-  background-color: #27292e !important;
+.page {
+  justify-content: center;
 }
-
 /* ScrollBar */
 
 ::-webkit-scrollbar {

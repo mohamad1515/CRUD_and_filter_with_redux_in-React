@@ -8,9 +8,9 @@ const Sidebar = () => {
   const [activeKey, setActiveKey] = React.useState("1");
   return (
     <div className="sidebar">
-      <Sidenav expanded={expanded} defaultOpenKeys={["3", "4"]}>
+      <Sidenav expanded={expanded}>
         <Sidenav.Body>
-          <Nav activeKey={activeKey} onSelect={setActiveKey}>
+          <Nav activeKey={activeKey}>
             <Nav.Item
               eventKey="1"
               className="dashboardIcon"

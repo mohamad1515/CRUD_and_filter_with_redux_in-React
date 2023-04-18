@@ -1,36 +1,19 @@
 import React from 'react';
+import { Pagination } from 'rsuite';
 
-const Paginate = ({ currentPage, setCurrentPage, totalPosts, postPerPage }) => {
-	const totalPages = Math.ceil(totalPosts / postPerPage);
-
-	let pages = [];
-
-	for (let p = 1; p <= totalPages; p++) {
-		pages.push(p);
-	}
+const Paginate = ({ currentPage, setCurrentPage, totalPosts }) => {
 
 	return (
-		<ul className="pagination">
-			<li className={`page-item ${currentPage === 1 && `disabled`}`}>
-				<button className="page-link" onClick={() => setCurrentPage(currentPage - 1)}>
-					&laquo;
-				</button>
-			</li>
-			{pages.map((page) => (
-				<li
-					key={page}
-					className={`page-item ${page === currentPage && `active`}`}
-					onClick={() => setCurrentPage(page)}
-				>
-					<button className="page-link">{page}</button>
-				</li>
-			))}
-			<li className={`page-item ${currentPage === totalPages && `disabled`}`}>
-				<button className="page-link" onClick={() => setCurrentPage(currentPage + 1)}>
-					&raquo;
-				</button>
-			</li>
-		</ul>
+		<>
+			<Pagination
+				className='page'
+				prev
+				last
+				next
+				first
+				total={totalPosts} limit={10} activePage={currentPage} onChangePage={setCurrentPage} />
+		</>
+
 	);
 };
 

@@ -1,6 +1,12 @@
 import { useState, useEffect } from 'react'
+import {
+    changeTheme
+} from "../redux/actions/PostActions";
+import { useDispatch } from 'react-redux';
 
 const useDarkMode = () => {
+    const dispatch = useDispatch();
+
     const [theme, setTheme] = useState('light')
 
     const toggleTheme = () => {
@@ -12,6 +18,12 @@ const useDarkMode = () => {
             setTheme('light')
         }
     }
+
+
+    useEffect(() => {
+        dispatch(changeTheme(theme));
+
+    }, [dispatch, theme]);
 
     useEffect(() => {
         const localTheme = window.localStorage.getItem('theme')

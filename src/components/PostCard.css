@@ -1,19 +1,30 @@
 .info .title {
   font-size: 18px;
   font-weight: 200;
-  color: white;
+
   line-height: 15px;
   text-align: left;
   padding-left: 10px;
 }
-
+.rs-theme-dark .info .title {
+  color: white;
+}
+.rs-theme-light .info .title {
+  color: #363636;
+}
 .info .date {
   font-size: 12px;
-  color: #adadad;
+  color: #e9e9e9;
   line-height: 30px;
   margin-top: 5px;
   text-align: left;
   padding-left: 10px;
+}
+.rs-theme-dark .info .date {
+  color: #adadad;
+}
+.rs-theme-light .info .date {
+  color: #a8a8a8;
 }
 
 .cart {
@@ -59,10 +70,17 @@
   background-size: contain;
   position: absolute;
   z-index: 1;
-  background-color: #fff;
+  color: #333;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.rs-theme-dark .cart .front .avatar {
+  color: #fff;
+}
+.rs-theme-light .cart .front .avatar {
+  background-color: whitesmoke !important;
 }
 .cart .front .info-box {
   height: 25%;
@@ -72,8 +90,11 @@
   left: 0;
   bottom: 0;
   /* background: rgba(200, 38, 29, 0.7); */
-  background: rgb(118 118 118 / 70%);
+
   /* padding: 50px; */
+}
+.rs-theme-dark .cart .front .info-box {
+  background: rgb(118 118 118 / 70%);
 }
 .avatar .car,
 .avatar .bike {
