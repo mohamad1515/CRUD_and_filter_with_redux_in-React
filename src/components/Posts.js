@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Header from "./Header";
 import PostCard from "./PostCard";
 import Loading from "./Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { filterPostsAction } from "../redux/actions/PostActions";
-import Paginate from "./Paginate";
+import { Pagination } from 'rsuite';
 import useDarkMode from "../hooks/dark-mode";
 
 const Posts = () => {
@@ -14,25 +14,23 @@ const Posts = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [theme, toggleTheme] = useDarkMode();
 
-  const handleChangeSearch = (e) => {
-    if (e.target.value.length > 0) {
+  const handleChangeSearch = (v, e) => {
+    if (v && v.length > 0) {
       setCurrentPage(1);
     }
-    setSearch(e.target.value);
+    setSearch(v);
   };
 
   useEffect(() => {
     dispatch(filterPostsAction());
   }, []);
 
-  // const postPerPage = 10;
-  // const totalPosts = posts.length;
+  const postPerPage = 10;
+  const totalPosts = posts?.length;
 
   // const indexOfLastPost = currentPage * postPerPage;
   // const indexOfFirstPost = indexOfLastPost - postPerPage;
-  // const filterPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-  // {`col ${theme === "dark" ? "dark" : "light"}`}
-
+  //  const filterPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
     <div className="col">
@@ -51,14 +49,20 @@ const Posts = () => {
               <PostCard key={post._id} post={post} />
             ))}
           </div>
-          {/* {totalPosts > postPerPage && (
-            <Paginate
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              totalPosts={totalPosts}
-              postPerPage={postPerPage}
+          {totalPosts >= postPerPage && (
+            <Pagination
+              className='page'
+              prev
+              last
+              next
+              first
+              size="xs"
+              total={totalPosts}
+              limit={10}
+              activePage={currentPage}
+              onChangePage={setCurrentPage}
             />
-          )} */}
+          )}
         </div>
       )}
     </div>

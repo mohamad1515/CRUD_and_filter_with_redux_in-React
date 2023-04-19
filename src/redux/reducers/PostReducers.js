@@ -49,13 +49,13 @@ export const PostReducers = (state = initialState, action) => {
 				product: action.payload
 			};
 		case actions.SORT_POSTS_ASC:
-			const sortAsc = action.payload.sort((a, b) => (a.title < b.title ? 1 : a.title > b.title ? -1 : 0));
+			const sortAsc = action.payload?.sort((a, b) => (a.title < b.title ? 1 : a.title > b.title ? -1 : 0));
 			return {
 				...state,
 				posts: sortAsc,
 			};
 		case actions.SORT_POSTS_DESC:
-			const sortDesc = action.payload.sort((a, b) => (a.title < b.title ? -1 : a.title > b.title ? 1 : 0));
+			const sortDesc = action.payload?.sort((a, b) => (a.title < b.title ? -1 : a.title > b.title ? 1 : 0));
 			return {
 				...state,
 				posts: sortDesc,

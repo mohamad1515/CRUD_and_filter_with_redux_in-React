@@ -8,19 +8,15 @@ import {
   filterPostsAction,
   clearFilterPosts,
 } from "../redux/actions/PostActions";
-import { Button } from "rsuite";
-import { CheckPicker } from "rsuite";
-import { Input } from "rsuite";
-import { DateRangePicker } from "rsuite";
-import { BsSun } from "react-icons/bs";
+import { Button, CheckPicker, Input, DateRangePicker } from "rsuite";
 import { BiSearch } from "react-icons/bi";
-import { BsFillMoonFill, BsSortDown, BsSortDownAlt } from "react-icons/bs";
+import { BsSun, BsFillMoonFill, BsSortDown, BsSortDownAlt } from "react-icons/bs";
 import { MdOutlineClear } from "react-icons/md";
 import "./Searchbar/Searchbar.css";
 
 const Header = ({ search, setSearch, onChange, toggleTheme }) => {
   const { filterPostsInputModel } = useSelector((state) => state.PostReducers);
-
+  const [checkStatus, setCheckStatus] = useState(true)
   const color = [
     "Red",
     "Green",
@@ -30,11 +26,11 @@ const Header = ({ search, setSearch, onChange, toggleTheme }) => {
     "Silver",
     "Yellow",
   ].map((item) => ({ label: item, value: item.toLowerCase() }));
-  const object = ["Person", "Bike", "Vehicle"].map((item) => ({
+  const object = ["Person", "Bicycle", "Vehicle"].map((item) => ({
     label: item,
     value: item.toLowerCase(),
   }));
-  const type = ["Truk", "Hatchback", "Sedan"].map((item) => ({
+  const type = ["Truck", "SUV", "Sedan"].map((item) => ({
     label: item,
     value: item.toLowerCase(),
   }));
@@ -52,9 +48,15 @@ const Header = ({ search, setSearch, onChange, toggleTheme }) => {
     }
   }, [search, sort, dispatch]);
 
-  const searchHandler = async (e) => {
-    dispatch(filterPostsAction());
-  };
+  const objectStatus = (v) => {
+    console.log("v ", v)
+    if (v.includes("vehicle")) {
+      setCheckStatus(false)
+    } else {
+      setCheckStatus(true)
+    }
+
+  }
 
   return (
     <header>
@@ -85,20 +87,33 @@ const Header = ({ search, setSearch, onChange, toggleTheme }) => {
             placeholder="Date"
             style={{ width: 234 }}
           />
+
           <CheckPicker
+            name="objectTypes"
             placeholder="ObjectType"
             data={object}
             style={{ width: 234 }}
-          />
-          <CheckPicker
-            name="colors"
-            placeholder="Color"
-            data={color}
-            style={{ width: 234 }}
-            onChange={(v) => dispatch(setFilterPostField("colors", v))}
-            value={filterPostsInputModel.colors}
-          />
-          <CheckPicker placeholder="Type" data={type} style={{ width: 234 }} />
+            onChange={objectStatus}
+            onSelect={(v) => dispatch(setFilterPostField("objectTypes", v))}
+            value={filterPostsInputModel.objectTypes}
+          />  {!checkStatus && <>
+            <CheckPicker
+              name="colors"
+              placeholder="Color"
+              data={color}
+              style={{ width: 234 }}
+              onChange={(v) => dispatch(setFilterPostField("colors", v))}
+              value={filterPostsInputModel.colors}
+            />
+            <CheckPicker
+              name="vehicleTypes"
+              placeholder="vehicleType"
+              data={type}
+              style={{ width: 234 }}
+              onChange={(v) => dispatch(setFilterPostField("vehicleTypes", v))}
+              value={filterPostsInputModel.vehicleTypes}
+              disabled={checkStatus}
+            /></>}
           <button type="button" className="theme ml-10">
             {sort === "ASC" ? (
               <BsSortDown onClick={() => setSort("DESC")} />
@@ -110,17 +125,17 @@ const Header = ({ search, setSearch, onChange, toggleTheme }) => {
         <div className="top-right">
           <Button
             className="filterBtn"
-            appearance="red"
+            appearance="default"
             endIcon={<MdOutlineClear className="red" />}
             onClick={(e) => dispatch(clearFilterPosts())}
           >
             Clear
           </Button>
           <Button
-            className="filterBtn"
+            className="filterBtn blue"
             appearance="primary"
             endIcon={<BiSearch />}
-            onClick={searchHandler}
+            onClick={(e) => dispatch(filterPostsAction())}
           >
             Search
           </Button>
