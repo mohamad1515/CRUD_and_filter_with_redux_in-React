@@ -1,17 +1,19 @@
 import { IFilterPostsInputModel } from "./interfaces";
 export class FilterPostsInputModel implements IFilterPostsInputModel {
-  dateRange: number[];
-  objectTypes: string[];
+  dateRange: string[] | null;
+  objects: string[];
   colors: string[];
-  vehicleTypes: string[];
+  vehicles: string[];
   from: number;
   size: number;
+  totalRecords: number;
   constructor() {
-    this.dateRange = [0, 0];
-    this.objectTypes = [];
+    this.dateRange = null;
+    this.objects = [];
     this.colors = [];
-    this.vehicleTypes = [];
+    this.vehicles = [];
     this.from = 0;
     this.size = 10;
+    this.totalRecords = 0;
   }
 }

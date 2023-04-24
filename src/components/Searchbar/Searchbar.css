@@ -48,7 +48,7 @@
   transform: scale(1.5);
   top: -2px;
 }
-.rs-input {
+.rs-input.searchHeader {
   width: 29% !important;
 }
 .dark .rs-input {

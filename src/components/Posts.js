@@ -10,7 +10,7 @@ import useDarkMode from "../hooks/dark-mode";
 const Posts = () => {
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
-  const { posts, loading } = useSelector((state) => state.PostReducers);
+  const { posts, loading, searchResults } = useSelector((state) => state.PostReducers);
   const [currentPage, setCurrentPage] = useState(1);
   const [theme, toggleTheme] = useDarkMode();
 
@@ -19,18 +19,17 @@ const Posts = () => {
       setCurrentPage(1);
     }
     setSearch(v);
+    console.log("theme", theme)
   };
 
   useEffect(() => {
     dispatch(filterPostsAction());
   }, []);
 
+  console.log("searchResults222", searchResults)
+
   const postPerPage = 10;
   const totalPosts = posts?.length;
-
-  // const indexOfLastPost = currentPage * postPerPage;
-  // const indexOfFirstPost = indexOfLastPost - postPerPage;
-  //  const filterPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
     <div className="col">
@@ -57,11 +56,7 @@ const Posts = () => {
               next
               first
               size="xs"
-              total={totalPosts}
-              limit={10}
-              activePage={currentPage}
-              onChangePage={setCurrentPage}
-            />
+              total={totalPosts} limit={10} activePage={currentPage} onChangePage={setCurrentPage} />
           )}
         </div>
       )}

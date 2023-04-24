@@ -23,7 +23,7 @@ export const PostReducers = (state = initialState, action) => {
 				...state,
 				loading: false,
 				posts: action.payload,
-				searchResults: action.payload.data,
+				searchResults: action.payload,
 			};
 		case actions.FETCH_POST_FAILED:
 			return {

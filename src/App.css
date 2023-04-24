@@ -28,7 +28,7 @@ body {
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
 }
 .home {
   width: 90%;
@@ -182,25 +182,19 @@ header .search {
   margin-bottom: 30px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-gap: 20px;
+  grid-gap: 40px;
   align-content: center;
   justify-content: center;
 }
 
 .posts .post {
-  padding: 30px;
-  border: 1px solid #292929;
-  color: #292929;
+  cursor: pointer;
+}
+.posts .post:hover {
+  transform: scale(1.05);
+  transition: all 0.3s;
 }
 
-.posts .post h2 {
-  font-size: 21px;
-  margin-bottom: 20px;
-}
-
-.posts .post p {
-  font-size: 16px;
-}
 .toggleBtn {
   cursor: pointer;
   border: none !important;
@@ -325,6 +319,73 @@ header .search {
 .page {
   justify-content: center;
 }
+
+/* Modal Btn Style */
+.btnStepOne {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  margin-top: 15px;
+}
+.btnStepOne button {
+  min-width: 80px;
+  transition: all 0.3s ease-out;
+}
+.btnstepTwo .close,
+.btnStepOne .close {
+  border: 1px solid darkgray;
+}
+.btnstepTwo .close:hover,
+.btnStepOne .close:hover {
+  font-weight: bold;
+}
+
+.btnStepOne .edit {
+  background-color: orange;
+  color: black;
+}
+
+.btnStepOne .edit:hover {
+  background-color: transparent;
+  border: 1px solid orange;
+  color: white;
+  font-weight: bold;
+}
+.btnstepTwo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  margin-top: 15px;
+}
+
+.btnstepTwo button {
+  min-width: 80px;
+  transition: all 0.3s ease-out;
+}
+
+.btnstepTwo .cancel {
+  border: 1px solid #da3333;
+  color: white;
+}
+.btnstepTwo .cancel:hover {
+  background-color: transparent;
+  color: #da3333;
+  font-weight: bold;
+}
+.btnstepTwo .save {
+  background: #03a9f4;
+  color: white;
+}
+.btnstepTwo .save:hover {
+  font-weight: bold;
+  background: transparent;
+  color: #03a9f4;
+  border: 1px solid #03a9f4;
+  transition: all 0.3s ease-out;
+}
+
 /* ScrollBar */
 
 ::-webkit-scrollbar {

@@ -24,9 +24,8 @@ const Sidebar = () => {
             </Nav.Item>
           </Nav>
         </Sidenav.Body>
-        <Sidenav.Toggle
+        <Sidenav.Toggle expanded={expanded}
           className="toggleBtn"
-          expanded={expanded}
           onToggle={(expanded) => setExpanded(expanded)}
         />
       </Sidenav>

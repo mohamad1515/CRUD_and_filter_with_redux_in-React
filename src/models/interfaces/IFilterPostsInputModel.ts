@@ -1,8 +1,9 @@
 export interface IFilterPostsInputModel {
-  dateRange: number[];
-  objectTypes: string[];
+  dateRange: string[] | null;
+  objects: string[];
   colors: string[];
-  vehicleTypes: string[];
+  vehicles: string[];
   from: number;
   size: number;
+  totalRecords: number;
 }

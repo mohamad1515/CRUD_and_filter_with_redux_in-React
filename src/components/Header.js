@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   sortPostsAsc,
   sortPostsDesc,
@@ -15,11 +15,11 @@ import { MdOutlineClear } from "react-icons/md";
 import "./Searchbar/Searchbar.css";
 
 const Header = ({ search, setSearch, onChange, toggleTheme }) => {
-  const { filterPostsInputModel } = useSelector((state) => state.PostReducers);
+  // const { filterPostsInputModel } = useSelector((state) => state.PostReducers);
   const [checkStatus, setCheckStatus] = useState(true)
   const color = [
     "Red",
-    "Green",
+    "White",
     "Gray",
     "Gold",
     "Blue",
@@ -49,13 +49,27 @@ const Header = ({ search, setSearch, onChange, toggleTheme }) => {
   }, [search, sort, dispatch]);
 
   const objectStatus = (v) => {
-    console.log("v ", v)
     if (v.includes("vehicle")) {
       setCheckStatus(false)
     } else {
       setCheckStatus(true)
     }
+  }
 
+  const dateHandler = (v) => {
+    if (v) {
+      var startDate = new Date(v[0])
+      var EndDate = new Date(v[1])
+
+      var FirstDate = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate()
+      var SecondDate = EndDate.getFullYear() + "-" + (EndDate.getMonth() + 1) + "-" + EndDate.getDate()
+
+      var dateRange = [FirstDate, SecondDate]
+      dispatch(setFilterPostField("dateRange", dateRange))
+    }
+    else {
+      dispatch(setFilterPostField("dateRange", null))
+    }
   }
 
   return (
@@ -68,6 +82,7 @@ const Header = ({ search, setSearch, onChange, toggleTheme }) => {
             id="search-box"
             value={search}
             onChange={onChange}
+            className="searchHeader"
           />
         </div>
         <div className="bottom-right">
@@ -84,36 +99,41 @@ const Header = ({ search, setSearch, onChange, toggleTheme }) => {
         <div className="top-left">
           <DateRangePicker
             appearance="default"
-            placeholder="Date"
+            onChange={(v) => dateHandler(v)}
+            format="yyyy-MM-dd"
             style={{ width: 234 }}
           />
 
           <CheckPicker
-            name="objectTypes"
-            placeholder="ObjectType"
+            name="objects"
+            placeholder="Object Type"
             data={object}
             style={{ width: 234 }}
             onChange={objectStatus}
-            onSelect={(v) => dispatch(setFilterPostField("objectTypes", v))}
-            value={filterPostsInputModel.objectTypes}
-          />  {!checkStatus && <>
-            <CheckPicker
-              name="colors"
-              placeholder="Color"
-              data={color}
-              style={{ width: 234 }}
-              onChange={(v) => dispatch(setFilterPostField("colors", v))}
-              value={filterPostsInputModel.colors}
-            />
-            <CheckPicker
-              name="vehicleTypes"
-              placeholder="vehicleType"
-              data={type}
-              style={{ width: 234 }}
-              onChange={(v) => dispatch(setFilterPostField("vehicleTypes", v))}
-              value={filterPostsInputModel.vehicleTypes}
-              disabled={checkStatus}
-            /></>}
+            onSelect={(v) => dispatch(setFilterPostField("objects", v))}
+          // value={filterPostsInputModel.objectTypes}
+          />
+          {!checkStatus &&
+            <>
+              <CheckPicker
+                name="colors"
+                placeholder="Color"
+                data={color}
+                style={{ width: 234 }}
+                onChange={(v) => dispatch(setFilterPostField("colors", v))}
+              // value={filterPostsInputModel.colors}
+              />
+              <CheckPicker
+                name="vehicles"
+                placeholder="Vehicle Types"
+                data={type}
+                style={{ width: 234 }}
+                onChange={(v) => dispatch(setFilterPostField("vehicles", v))}
+                // value={filterPostsInputModel.vehicleTypes}
+                disabled={checkStatus}
+              />
+            </>
+          }
           <button type="button" className="theme ml-10">
             {sort === "ASC" ? (
               <BsSortDown onClick={() => setSort("DESC")} />

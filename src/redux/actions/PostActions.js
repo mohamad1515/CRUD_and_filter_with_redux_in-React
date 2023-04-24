@@ -11,7 +11,7 @@ export const fetchPosts = () => async (dispatch) => {
 		dispatch({ type: actions.FETCH_POST_FAILED, payload: error.message });
 		console.log(error.message);
 	}
-};
+}
 
 export const fetchPostDetail = (id) => async (dispatch) => {
 	dispatch({ type: actions.FETCH_POST_DETAIL_REQUEST });
@@ -22,7 +22,7 @@ export const fetchPostDetail = (id) => async (dispatch) => {
 		dispatch({ type: actions.FETCH_POST_DETAIL_FAILED, payload: error.message });
 		console.log(error.message);
 	}
-};
+}
 
 export const setFilterPostField = (name, value) => (dispatch) => {
 	dispatch({ type: actions.SET_FILTER_POST_FIELD, payload: { name, value } });
@@ -34,6 +34,7 @@ export const filterPostsAction = () => async (dispatch, getState) => {
 	const result = await filterPosts(PostReducers.filterPostsInputModel)
 	if (result.ok && result.data && result.data.records) {
 		dispatch({ type: actions.FETCH_POST_SUCCESS, payload: result.data.records });
+		// dispatch({ type: actions.FETCH_POST_SUCCESS, payload: result.data.totalRecords });
 	} else {
 		dispatch({ type: actions.FETCH_POST_FAILED, payload: result.message });
 	}
@@ -47,12 +48,12 @@ export const clearFilterPosts = () => async (dispatch) => {
 export const sortPostsAsc = () => (dispatch, getState) => {
 	const { PostReducers } = getState();
 	dispatch({ type: actions.SORT_POSTS_ASC, payload: PostReducers.posts });
-};
+}
 
 export const sortPostsDesc = () => (dispatch, getState) => {
 	const { PostReducers } = getState();
 	dispatch({ type: actions.SORT_POSTS_DESC, payload: PostReducers.posts });
-};
+}
 
 export const searchPosts = (query) => (dispatch, getState) => {
 	console.log("search ", query);
@@ -61,8 +62,8 @@ export const searchPosts = (query) => (dispatch, getState) => {
 		post.title.toLowerCase().includes(query.toLowerCase())
 	);
 	dispatch({ type: actions.SEARCH_POSTS, payload: searchResults });
-};
+}
 
 export const changeTheme = (theme) => (dispatch) => {
 	dispatch({ type: actions.LOCAL_THEME, payload: theme });
-};
+}
