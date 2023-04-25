@@ -33,8 +33,7 @@ export const filterPostsAction = () => async (dispatch, getState) => {
 	const { PostReducers } = getState();
 	const result = await filterPosts(PostReducers.filterPostsInputModel)
 	if (result.ok && result.data && result.data.records) {
-		dispatch({ type: actions.FETCH_POST_SUCCESS, payload: result.data.records });
-		// dispatch({ type: actions.FETCH_POST_SUCCESS, payload: result.data.totalRecords });
+		dispatch({ type: actions.FETCH_POST_SUCCESS, payload: { posts: result.data.records, result: result.data.totalRecords } });
 	} else {
 		dispatch({ type: actions.FETCH_POST_FAILED, payload: result.message });
 	}
@@ -56,14 +55,17 @@ export const sortPostsDesc = () => (dispatch, getState) => {
 }
 
 export const searchPosts = (query) => (dispatch, getState) => {
-	console.log("search ", query);
 	const { PostReducers } = getState();
-	const searchResults = PostReducers.searchResults?.filter((post) =>
+	const searchRes = PostReducers.posts?.filter((post) =>
 		post.title.toLowerCase().includes(query.toLowerCase())
 	);
-	dispatch({ type: actions.SEARCH_POSTS, payload: searchResults });
+	dispatch({ type: actions.SEARCH_POSTS, payload: searchRes });
 }
 
 export const changeTheme = (theme) => (dispatch) => {
 	dispatch({ type: actions.LOCAL_THEME, payload: theme });
+}
+
+export const setPage = (side) => (dispatch) => {
+	dispatch({ type: actions.SET_PAGE, payload: side });
 }

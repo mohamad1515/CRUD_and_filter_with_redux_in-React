@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FaUserAlt, FaCarAlt } from "react-icons/fa";
 import { MdDirectionsBike } from "react-icons/md";
 import { Panel, Modal, Input, Button, Row, Col } from 'rsuite';
+import { updatePost } from "../services/FilterService"
 
 const PostCard = ({ post }) => {
 	const [open, setOpen] = useState(0);
@@ -15,9 +16,12 @@ const PostCard = ({ post }) => {
 	const handleCancel = () => setOpen(1);
 
 	const handleSave = () => {
-		console.log("Name ", name)
-		console.log("Date ", date)
-		console.log("description ", description)
+		const updateProduct = {
+			title: name,
+			detected: date,
+			description,
+		}
+		updatePost(updateProduct, post._id)
 	}
 
 	return (
@@ -58,9 +62,9 @@ const PostCard = ({ post }) => {
 								<img src={post?.image} alt={post?.title} className="w-full" />
 							</Col>
 							<Col lg={12}>
-								<Panel header={post?.title}>
+								<Panel header={post?.title} className="head">
 									<p>
-										<small>{post?.object_type}</small>
+										<small>{post?.object}</small>
 									</p>
 									<p>
 										<small>{post?.detected}</small>
@@ -69,7 +73,7 @@ const PostCard = ({ post }) => {
 										<small>{post?.color}</small>
 									</p>
 									<p>
-										<small>{post?.vehicle_type}</small>
+										<small>{post?.vehicle}</small>
 									</p>
 								</Panel>
 							</Col>
@@ -114,8 +118,8 @@ const PostCard = ({ post }) => {
 										id="edit-name"
 										onChange={(v) => setName(v)}
 									/>
-									<p style={{ lineHeight: 3 }} >
-										<small>{post?.object_type}</small>
+									<p style={{ lineHeight: 3, paddingLeft: 5 }} >
+										<small>{post?.object}</small>
 									</p>
 									<Input
 										defaultValue={post?.detected}
@@ -124,11 +128,11 @@ const PostCard = ({ post }) => {
 										id="edit-Date"
 										onChange={(v) => setDate(v)}
 									/>
-									<p>
+									<p style={{ lineHeight: 3, paddingLeft: 5 }}>
 										<small>{post?.color}</small>
 									</p>
-									<p>
-										<small>{post?.vehicle_type}</small>
+									<p style={{ lineHeight: 1, paddingLeft: 5 }}>
+										<small>{post?.vehicle}</small>
 									</p>
 								</Panel>
 							</Col>

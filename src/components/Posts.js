@@ -6,11 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { filterPostsAction } from "../redux/actions/PostActions";
 import { Pagination } from 'rsuite';
 import useDarkMode from "../hooks/dark-mode";
+import FormPost from "./FormPost"
+
 
 const Posts = () => {
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
-  const { posts, loading, searchResults } = useSelector((state) => state.PostReducers);
+  const { posts, loading, searchResults, side } = useSelector((state) => state.PostReducers);
   const [currentPage, setCurrentPage] = useState(1);
   const [theme, toggleTheme] = useDarkMode();
 
@@ -19,49 +21,67 @@ const Posts = () => {
       setCurrentPage(1);
     }
     setSearch(v);
-    console.log("theme", theme)
   };
 
   useEffect(() => {
     dispatch(filterPostsAction());
   }, []);
 
-  console.log("searchResults222", searchResults)
 
   const postPerPage = 10;
-  const totalPosts = posts?.length;
+
+  const indexOfLastPost = currentPage * postPerPage;
+  const indexOfFirstPost = indexOfLastPost - postPerPage;
+  const filterPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
     <div className="col">
-      <Header
-        search={search}
-        setSearch={setSearch}
-        onChange={handleChangeSearch}
-        toggleTheme={toggleTheme}
-      />
-      {loading ? (
-        <Loading />
-      ) : (
-        <div className="home">
-          <div className="posts">
-            {posts && posts.map((post) => (
-              <PostCard key={post._id} post={post} />
-            ))}
-          </div>
-          {totalPosts >= postPerPage && (
-            <Pagination
-              className='page'
-              prev
-              last
-              next
-              first
-              size="xs"
-              total={totalPosts} limit={10} activePage={currentPage} onChangePage={setCurrentPage} />
-          )}
-        </div>
-      )}
+      {(() => {
+        switch (side) {
+          case 'search':
+            return (
+              <>
+                <Header
+                  search={search}
+                  setSearch={setSearch}
+                  onChange={handleChangeSearch}
+                  toggleTheme={toggleTheme}
+                />
+                {loading ? (
+                  <Loading />
+                ) : (
+                  <div className="home">
+                    <div className="posts">
+                      {filterPosts?.map((post) => (
+                        <PostCard key={post._id} post={post} />
+                      ))}
+                    </div>
+                    {searchResults >= postPerPage && (
+                      <Pagination
+                        className='page'
+                        prev
+                        last
+                        next
+                        first
+                        size="xs"
+                        total={searchResults} limit={10} activePage={currentPage} onChangePage={setCurrentPage} />
+                    )}
+                  </div>
+                )}
+              </>
+            )
+          case 'add':
+            return (
+              <FormPost />
+            )
+          default:
+            return null
+        }
+      })()}
     </div>
   );
 };
 
 export default Posts;
+
+

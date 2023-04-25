@@ -5,7 +5,7 @@ export class FilterPostsInputModel implements IFilterPostsInputModel {
   colors: string[];
   vehicles: string[];
   from: number;
-  size: number;
+  // size: number;
   totalRecords: number;
   constructor() {
     this.dateRange = null;
@@ -13,7 +13,7 @@ export class FilterPostsInputModel implements IFilterPostsInputModel {
     this.colors = [];
     this.vehicles = [];
     this.from = 0;
-    this.size = 10;
+    // this.size = 10;
     this.totalRecords = 0;
   }
 }

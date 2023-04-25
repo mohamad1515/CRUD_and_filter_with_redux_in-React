@@ -15,7 +15,6 @@ import { MdOutlineClear } from "react-icons/md";
 import "./Searchbar/Searchbar.css";
 
 const Header = ({ search, setSearch, onChange, toggleTheme }) => {
-  // const { filterPostsInputModel } = useSelector((state) => state.PostReducers);
   const [checkStatus, setCheckStatus] = useState(true)
   const color = [
     "Red",
@@ -47,6 +46,7 @@ const Header = ({ search, setSearch, onChange, toggleTheme }) => {
       dispatch(sortPostsAsc());
     }
   }, [search, sort, dispatch]);
+
 
   const objectStatus = (v) => {
     if (v.includes("vehicle")) {
@@ -80,7 +80,6 @@ const Header = ({ search, setSearch, onChange, toggleTheme }) => {
             placeholder="Filter..."
             size="md"
             id="search-box"
-            value={search}
             onChange={onChange}
             className="searchHeader"
           />
@@ -111,7 +110,6 @@ const Header = ({ search, setSearch, onChange, toggleTheme }) => {
             style={{ width: 234 }}
             onChange={objectStatus}
             onSelect={(v) => dispatch(setFilterPostField("objects", v))}
-          // value={filterPostsInputModel.objectTypes}
           />
           {!checkStatus &&
             <>
@@ -121,7 +119,6 @@ const Header = ({ search, setSearch, onChange, toggleTheme }) => {
                 data={color}
                 style={{ width: 234 }}
                 onChange={(v) => dispatch(setFilterPostField("colors", v))}
-              // value={filterPostsInputModel.colors}
               />
               <CheckPicker
                 name="vehicles"
@@ -129,8 +126,7 @@ const Header = ({ search, setSearch, onChange, toggleTheme }) => {
                 data={type}
                 style={{ width: 234 }}
                 onChange={(v) => dispatch(setFilterPostField("vehicles", v))}
-                // value={filterPostsInputModel.vehicleTypes}
-                disabled={checkStatus}
+              // disabled={checkStatus}
               />
             </>
           }

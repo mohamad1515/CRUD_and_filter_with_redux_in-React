@@ -278,12 +278,6 @@ header .search {
   /* background-color: #1e1f26; */
   border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
 }
-.rs-sidenav-item {
-  font-size: 14px;
-  font-weight: bold;
-  /* background-color: #1e1f26 !important; */
-  color: #fff;
-}
 .rs-sidenav-nav
   > .rs-dropdown
   .rs-dropdown-toggle
@@ -318,6 +312,9 @@ header .search {
 }
 .page {
   justify-content: center;
+}
+.head .rs-panel-header {
+  padding-top: 5px;
 }
 
 /* Modal Btn Style */

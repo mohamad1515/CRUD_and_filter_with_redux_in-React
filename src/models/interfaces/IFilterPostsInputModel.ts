@@ -4,6 +4,6 @@ export interface IFilterPostsInputModel {
   colors: string[];
   vehicles: string[];
   from: number;
-  size: number;
+  // size: number;
   totalRecords: number;
 }

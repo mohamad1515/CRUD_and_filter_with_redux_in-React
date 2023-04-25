@@ -22,8 +22,8 @@ export const PostReducers = (state = initialState, action) => {
 			return {
 				...state,
 				loading: false,
-				posts: action.payload,
-				searchResults: action.payload,
+				posts: action.payload.posts,
+				searchResults: action.payload.result,
 			};
 		case actions.FETCH_POST_FAILED:
 			return {
@@ -83,6 +83,11 @@ export const PostReducers = (state = initialState, action) => {
 			return {
 				...state,
 				filterPostsInputModel: JSON.parse(filterPostsInputModelStr)
+			}
+		case actions.SET_PAGE:
+			return {
+				...state,
+				side: action.payload
 			}
 		default:
 			return state;
