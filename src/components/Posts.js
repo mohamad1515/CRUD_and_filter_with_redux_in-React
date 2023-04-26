@@ -7,7 +7,7 @@ import { filterPostsAction } from "../redux/actions/PostActions";
 import { Pagination } from 'rsuite';
 import useDarkMode from "../hooks/dark-mode";
 import FormPost from "./FormPost"
-
+import DisplayModal from "./DisplayModal";
 
 const Posts = () => {
   const [search, setSearch] = useState("");
@@ -35,50 +35,53 @@ const Posts = () => {
   const filterPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
-    <div className="col">
-      {(() => {
-        switch (side) {
-          case 'search':
-            return (
-              <>
-                <Header
-                  search={search}
-                  setSearch={setSearch}
-                  onChange={handleChangeSearch}
-                  toggleTheme={toggleTheme}
-                />
-                {loading ? (
-                  <Loading />
-                ) : (
-                  <div className="home">
-                    <div className="posts">
-                      {filterPosts?.map((post) => (
-                        <PostCard key={post._id} post={post} />
-                      ))}
+    <>
+      <div className="col">
+        {(() => {
+          switch (side) {
+            case 'search':
+              return (
+                <>
+                  <Header
+                    search={search}
+                    setSearch={setSearch}
+                    onChange={handleChangeSearch}
+                    toggleTheme={toggleTheme}
+                  />
+                  {loading ? (
+                    <Loading />
+                  ) : (
+                    <div className="home">
+                      <div className="posts">
+                        {filterPosts?.map((post) => (
+                          <PostCard key={post._id} post={post} />
+                        ))}
+                      </div>
+                      {searchResults >= postPerPage && (
+                        <Pagination
+                          className='page'
+                          prev
+                          last
+                          next
+                          first
+                          size="xs"
+                          total={searchResults} limit={10} activePage={currentPage} onChangePage={setCurrentPage} />
+                      )}
                     </div>
-                    {searchResults >= postPerPage && (
-                      <Pagination
-                        className='page'
-                        prev
-                        last
-                        next
-                        first
-                        size="xs"
-                        total={searchResults} limit={10} activePage={currentPage} onChangePage={setCurrentPage} />
-                    )}
-                  </div>
-                )}
-              </>
-            )
-          case 'add':
-            return (
-              <FormPost />
-            )
-          default:
-            return null
-        }
-      })()}
-    </div>
+                  )}
+                </>
+              )
+            case 'add':
+              return (
+                <FormPost />
+              )
+            default:
+              return null
+          }
+        })()}
+      </div>
+      <DisplayModal />
+    </>
   );
 };
 

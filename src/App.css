@@ -28,7 +28,7 @@ body {
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  /* height: 100vh; */
+  height: 100vh;
 }
 .home {
   width: 90%;
@@ -73,15 +73,15 @@ header {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 10px;
   margin-top: 0;
 }
 .bottom-right {
-  width: 1%;
-  margin-right: 4%;
+  width: 5%;
 }
 .bottom-left {
-  width: 99%;
+  width: 95%;
 }
 .ml-10 {
   margin-left: 10px;
@@ -136,43 +136,52 @@ header .search {
 .avatar .car {
   transform: scale(1.5);
 }
+.sort,
 .theme {
   background-color: transparent;
   transform: scale(1.5);
   transition: all 1s ease-in-out;
 }
-.rs-theme-dark .page-item.active .page-link {
-  background-color: #92211b;
+.rs-theme-dark .theme svg {
+  color: #ffc107;
 }
-.light .page-item.active .page-link {
-  background-color: #d86760;
+
+.rs-theme-light .theme svg {
+  color: #673ab7;
 }
-.dark .rs-picker-toggle.rs-btn.rs-btn-default {
-  background-color: #252830 !important;
-  border-color: #333641 !important;
+
+/* Create Post */
+.createPost {
+  border: 1px solid #404040;
+  border-radius: 5px;
+  padding: 0;
+  margin: 30px auto;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 }
-.dark .rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input,
-.dark .rs-picker-menu.rs-picker-check-menu,
-.dark .rs-picker-menu.rs-picker-select-menu {
-  background-color: #252830 !important;
+.createPost .rs-panel-body {
+  padding: 0;
 }
-.dark .rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
-  border-color: #333641 !important;
+.createPost .rs-form {
+  padding: 20px;
 }
-.dark .rs-checkbox-wrapper .rs-checkbox-inner:befores {
-  border: 1px solid #333641 !important;
+.createPost .rs-form-horizontal .rs-form-group .rs-form-control-label {
+  text-align: left !important;
+  width: 100%;
 }
-.dark .rs-dropdown-item.rs-dropdown-item-focus,
-.dark .rs-dropdown-item:focus-visible,
-.dark .rs-check-item.rs-check-item-focus,
-.dark .rs-check-item:focus,
-.dark .rs-check-item:not(.rs-checkbox-disabled):hover {
-  background-color: #32353b !important;
+.createPost .min-w-430.ml-0 {
+  min-width: 430px;
+  margin-left: 0;
 }
-.dark .rs-check-item .rs-checkbox-checker > label {
-  color: #8e8e93 !important;
+.createPost .min-w-430 {
+  min-width: 430px;
 }
-/** END HEADER STYLE **/
+.createPost .rs-btn-toolbar.rs-stack {
+  justify-content: end;
+}
+.createPost .rs-form:not(.rs-form-inline) .rs-form-group:not(:last-child) {
+  margin-bottom: 18px;
+}
+
 .col {
   width: 100%;
   padding: 0;
@@ -238,11 +247,13 @@ header .search {
 }
 .rs-theme-dark .filterBtn.blue {
   background-color: transparent !important;
-  border: 1px solid #34c3ff !important;
-  color: #34c3ff !important;
+  border: 1px solid #6576d8 !important;
+  color: #6576d8 !important;
 }
-.red {
-  color: red;
+.rs-theme-dark .filterBtn.blue:hover {
+  font-weight: bold;
+  transform: scale(1.05);
+  transition: 0.2s all;
 }
 .blue {
   background-color: #1675e0;
@@ -329,11 +340,11 @@ header .search {
   min-width: 80px;
   transition: all 0.3s ease-out;
 }
-.btnstepTwo .close,
+.btnStepTwo .close,
 .btnStepOne .close {
   border: 1px solid darkgray;
 }
-.btnstepTwo .close:hover,
+.btnStepTwo .close:hover,
 .btnStepOne .close:hover {
   font-weight: bold;
 }
@@ -349,7 +360,7 @@ header .search {
   color: white;
   font-weight: bold;
 }
-.btnstepTwo {
+.btnStepTwo {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -357,30 +368,45 @@ header .search {
   margin-top: 15px;
 }
 
-.btnstepTwo button {
+.btnStepTwo button {
   min-width: 80px;
   transition: all 0.3s ease-out;
 }
 
-.btnstepTwo .cancel {
-  border: 1px solid #da3333;
+.btnStepTwo .cancel {
+  border: 1px solid #ccc;
   color: white;
 }
-.btnstepTwo .cancel:hover {
+.btnStepTwo .cancel:hover {
   background-color: transparent;
-  color: #da3333;
+  color: #acacac;
   font-weight: bold;
 }
-.btnstepTwo .save {
+.btnStepTwo .save {
   background: #03a9f4;
   color: white;
 }
-.btnstepTwo .save:hover {
+.btnStepTwo .save:hover {
   font-weight: bold;
   background: transparent;
   color: #03a9f4;
   border: 1px solid #03a9f4;
   transition: all 0.3s ease-out;
+}
+.btnStepOne .editIcon,
+.btnStepTwo .saveIcon,
+.btnStepTwo .removeIcon {
+  transform: scale(1.2);
+  margin: 0px 0px 3px 3px;
+}
+.btnStepTwo .remove {
+  background-color: #da3333;
+  border: 1px solid #da3333;
+  color: white;
+}
+.btnStepTwo .remove:hover {
+  background-color: transparent;
+  color: #da3333;
 }
 
 /* ScrollBar */

@@ -20,7 +20,7 @@ export const createPost = async (inputModel) => {
     headers: {
       "Content-Type": "application/json"
     },
-    method: "put",
+    method: "post",
     body: JSON.stringify(inputModel)
   }
   return api(CREATE_POST_API_URL, options)
@@ -37,13 +37,12 @@ export const updatePost = async (inputModel, param) => {
   return api(`${UPDATE_POST_API_URL + param}`, options)
 }
 
-export const deletePost = async (inputModel, param) => {
+export const deletePost = async (param) => {
   const options = {
     headers: {
       "Content-Type": "application/json"
     },
-    method: "put",
-    body: JSON.stringify(inputModel)
+    method: "post",
   }
   return api(`${DELETE_POST_API_URL + param}`, options)
 }

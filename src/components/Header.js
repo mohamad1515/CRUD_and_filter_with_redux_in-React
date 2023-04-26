@@ -11,7 +11,7 @@ import {
 import { Button, CheckPicker, Input, DateRangePicker } from "rsuite";
 import { BiSearch } from "react-icons/bi";
 import { BsSun, BsFillMoonFill, BsSortDown, BsSortDownAlt } from "react-icons/bs";
-import { MdOutlineClear } from "react-icons/md";
+import { AiOutlineClear } from "react-icons/ai";
 import "./Searchbar/Searchbar.css";
 
 const Header = ({ search, setSearch, onChange, toggleTheme }) => {
@@ -130,7 +130,7 @@ const Header = ({ search, setSearch, onChange, toggleTheme }) => {
               />
             </>
           }
-          <button type="button" className="theme ml-10">
+          <button type="button" className="sort ml-10">
             {sort === "ASC" ? (
               <BsSortDown onClick={() => setSort("DESC")} />
             ) : (
@@ -142,7 +142,7 @@ const Header = ({ search, setSearch, onChange, toggleTheme }) => {
           <Button
             className="filterBtn"
             appearance="default"
-            endIcon={<MdOutlineClear className="red" />}
+            endIcon={<AiOutlineClear />}
             onClick={(e) => dispatch(clearFilterPosts())}
           >
             Clear

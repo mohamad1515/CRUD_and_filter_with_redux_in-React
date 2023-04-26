@@ -69,3 +69,7 @@ export const changeTheme = (theme) => (dispatch) => {
 export const setPage = (side) => (dispatch) => {
 	dispatch({ type: actions.SET_PAGE, payload: side });
 }
+
+export const setModal = (modal) => (dispatch) => {
+	dispatch({ type: actions.SET_MODAL, payload: modal })
+}

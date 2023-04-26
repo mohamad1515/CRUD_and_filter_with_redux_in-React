@@ -2,27 +2,27 @@ import { useState } from "react";
 import { FaUserAlt, FaCarAlt } from "react-icons/fa";
 import { MdDirectionsBike } from "react-icons/md";
 import { Panel, Modal, Input, Button, Row, Col } from 'rsuite';
-import { updatePost } from "../services/FilterService"
+import { updatePost, deletePost } from "../services/FilterService"
+import { FiTrash2, FiSave } from "react-icons/fi";
+import { CiEdit } from "react-icons/ci";
+import DisplayModal from "./DisplayModal";
+import { useDispatch } from "react-redux";
+import { setModal } from "src/redux/actions/PostActions";
+
 
 const PostCard = ({ post }) => {
+	const dispatch = useDispatch()
 	const [open, setOpen] = useState(0);
-	const [name, setName] = useState("")
-	const [date, setDate] = useState("")
-	const [description, setDescription] = useState("")
 
-	const handleOpen = () => setOpen(1);
+
+	const handleOpen = () => {
+		dispatch(setModal({ open: true, id: post._id }))
+	}
 	const handleClose = () => setOpen(0);
 	const handleEdit = () => setOpen(2);
 	const handleCancel = () => setOpen(1);
 
-	const handleSave = () => {
-		const updateProduct = {
-			title: name,
-			detected: date,
-			description,
-		}
-		updatePost(updateProduct, post._id)
-	}
+
 
 	return (
 		<>
@@ -51,7 +51,7 @@ const PostCard = ({ post }) => {
 				</Panel>
 			</Panel>
 
-			{open === 1 ? (
+			{/* {open === 1 ? (
 				<Modal keyboard={false} open={open} onClose={handleClose}>
 					<Modal.Header>
 						<Modal.Title>{post?.title}</Modal.Title>
@@ -88,7 +88,8 @@ const PostCard = ({ post }) => {
 							<Button
 								className="edit"
 								onClick={handleEdit} appearance="subtle">
-								Edit
+								<span>Edit</span>
+								<CiEdit className="editIcon" />
 							</Button>
 							<Button
 								className="close"
@@ -150,13 +151,18 @@ const PostCard = ({ post }) => {
 						</Row>
 					</Modal.Body>
 					<Modal.Footer>
-						<div className="btnstepTwo">
+						<div className="btnStepTwo">
 							<div className="leftBtn">
 								<Button onClick={handleCancel} appearance="subtle" className="cancel">
-									Cancel
+									<span>Cancel</span>
 								</Button>
 								<Button onClick={handleSave} appearance="subtle" className="save">
-									Save
+									<span>Save</span>
+									<FiSave className="saveIcon" />
+								</Button>
+								<Button onClick={handleDelete(post._id)} appearance="subtle" className="remove">
+									<span>Delete</span>
+									<FiTrash2 className="removeIcon" />
 								</Button>
 							</div>
 							<div className="rightBtn">
@@ -167,9 +173,8 @@ const PostCard = ({ post }) => {
 						</div>
 					</Modal.Footer>
 				</Modal >
-			) : null}
+			) : null} */}
 		</>
-
 	);
 };
 

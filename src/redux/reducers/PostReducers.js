@@ -8,7 +8,11 @@ const initialState = {
 	posts: [],
 	searchResults: [],
 	page: 1,
-	theme: window.localStorage.getItem('theme')
+	theme: window.localStorage.getItem('theme'),
+	modal: {
+		open: false,
+		id: 0
+	}
 };
 
 export const PostReducers = (state = initialState, action) => {
@@ -88,6 +92,11 @@ export const PostReducers = (state = initialState, action) => {
 			return {
 				...state,
 				side: action.payload
+			}
+		case actions.SET_MODAL:
+			return {
+				...state,
+				modal: action.payload
 			}
 		default:
 			return state;
