@@ -1,0 +1,53 @@
+.userProfile,
+.editProfileDetails {
+  padding: 20px 30px 0;
+}
+
+.userImg {
+  position: relative;
+  width: 175px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.userImg img {
+  border: 1px dashed #fff;
+  width: 175px;
+  object-fit: cover;
+}
+
+.uploadBox {
+  position: absolute;
+  top: -25px;
+  right: -25px;
+}
+
+.uploadINputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.uploadBtn {
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 0;
+  font-size: 18px;
+  border: 1px solid white;
+  color: gray;
+  cursor: pointer;
+  box-shadow: 1px 1px 7px #ccc;
+  transition: all 0.3s ease;
+}
+
+.uploadBtn:hover {
+  box-shadow: 3px 1px 25px #ccc;
+}

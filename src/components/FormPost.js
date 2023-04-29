@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import Uploader from './Uploader/Uploader';
 import { Form, Input, ButtonToolbar, Button, SelectPicker, Panel, DatePicker, Grid, Row, Col } from 'rsuite';
 import "../App.css"
 import ED from '../assets/ed.jpg'
 import { createPost } from 'src/services/FilterService';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const color = [
@@ -44,12 +47,19 @@ const FormPost = () => {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [detected, setDetected] = useState("")
-    const [objectType, setObjectType] = useState("")
+    const [object, setObject] = useState("")
     const [color, setColor] = useState("")
-    const [vehicleType, setVehicleType] = useState("")
+    const [vehicle, setVehicle] = useState("")
+    const [img, setImg] = useState("")
 
-    const objectHandler = (v) => {
-        setObjectType(v)
+    console.log("img ", img)
+
+    const dateHandler = (v) => {
+        if (v) {
+            var date = new Date(v)
+            var createDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+            setDetected(createDate)
+        }
     }
 
     const SendData = () => {
@@ -57,11 +67,15 @@ const FormPost = () => {
             title,
             detected,
             description,
-            objectType,
+            object,
             color,
-            vehicleType
+            vehicle
         }
         createPost(createProduct)
+        toast.success("Item Created!");
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000);
     }
 
     return (
@@ -73,7 +87,7 @@ const FormPost = () => {
                             <Form.Group controlId="title">
                                 <Form.ControlLabel>Title</Form.ControlLabel>
                                 <Form.Control name="title"
-                                    onChange={(v) => setTitle(v)}
+                                    onChange={setTitle}
                                     className='min-w-430' />
                             </Form.Group>
                             <Form.Group controlId="description">
@@ -82,44 +96,45 @@ const FormPost = () => {
                                     onChange={(v) => setDescription(v)}
                                     className='min-w-430' />
                             </Form.Group>
+                            <Uploader img={img} setImg={setImg} />
                             <Form.Group controlId="detected">
                                 <Form.ControlLabel>Detected</Form.ControlLabel>
                                 <Form.Control name="detected" accepter={NewDate}
-                                    onChange={(v) => setDetected(v)}
+                                    onChange={dateHandler}
                                     className='min-w-430 ml-0' />
                             </Form.Group>
                             <Form.Group controlId="object">
                                 <Form.ControlLabel>Object Type</Form.ControlLabel>
                                 <Form.Control name="object" accepter={NewObjectType}
-                                    onChange={objectHandler}
+                                    onChange={setObject}
                                     className='min-w-430 ml-0' />
                             </Form.Group>
-                            {objectType === "vehicle" ? (
+                            {object === "vehicle" ? (
                                 <>
                                     <Form.Group controlId="color">
                                         <Form.ControlLabel>Color</Form.ControlLabel>
                                         <Form.Control name="color"
                                             accepter={NewColor}
-                                            onChange={(v) => setColor(v)}
+                                            onChange={setColor}
                                             className='min-w-430 ml-0' />
                                     </Form.Group>
                                     <Form.Group controlId="vehicle">
                                         <Form.ControlLabel>Vehicle Type</Form.ControlLabel>
                                         <Form.Control name="vehicle"
                                             accepter={NewVehicleType}
-                                            onChange={(v) => setVehicleType(v)}
+                                            onChange={setVehicle}
                                             className='min-w-430 ml-0'
                                         />
                                     </Form.Group>
                                 </>
                             ) : null}
-                            {objectType === "bicycle" ? (
+                            {object === "bicycle" ? (
                                 <>
                                     <Form.Group controlId="color">
                                         <Form.ControlLabel>Color</Form.ControlLabel>
                                         <Form.Control name="color"
                                             accepter={NewColor}
-                                            onChange={(v) => setColor(v)}
+                                            onChange={setColor}
                                             className='min-w-430 ml-0' />
                                     </Form.Group>
 
@@ -134,10 +149,22 @@ const FormPost = () => {
                         </Form>
                     </Col>
                     <Col lg={12} style={{ padding: 0 }}>
-                        <img src={ED} alt="ed" width="100%" />
+                        <img src={ED} alt="ed" width="120%" />
                     </Col>
                 </Row>
             </Panel>
+            <ToastContainer
+                position="top-center"
+                autoClose={1000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
         </Grid>
     )
 }

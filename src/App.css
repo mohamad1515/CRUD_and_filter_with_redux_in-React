@@ -28,7 +28,7 @@ body {
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
 }
 .home {
   width: 90%;
@@ -214,7 +214,7 @@ header .search {
   /* border: 1px solid #252830; */
   border-radius: 50%;
   padding: 2px !important;
-  transform: translateX(10px);
+  transform: translate(10px, -100px);
   /* background-color: #252830 !important; */
   width: 23px;
   height: 23px;
@@ -407,6 +407,10 @@ header .search {
 .btnStepTwo .remove:hover {
   background-color: transparent;
   color: #da3333;
+}
+
+.rs-pagination {
+  margin-bottom: 20px !important;
 }
 
 /* ScrollBar */

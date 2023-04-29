@@ -1,4 +1,4 @@
-import { Panel, Modal, Input, Button, Row, Col } from 'rsuite';
+import { Panel, Modal, DatePicker, Input, Button, Row, Col } from 'rsuite';
 import { setModal } from 'src/redux/actions/PostActions';
 import { updatePost, deletePost } from "../services/FilterService"
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,7 +7,6 @@ import { FiTrash2, FiSave } from "react-icons/fi";
 import { CiEdit } from "react-icons/ci";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 
 const DisplayModal = () => {
     const [post, setPost] = useState("")
@@ -20,15 +19,31 @@ const DisplayModal = () => {
 
     const handleClose = () => {
         dispatch(setModal({ open: false, id: 0 }))
+        setName("")
+        setDate("")
+        setDescription("")
+    }
+
+    const dateHandler = (v) => {
+        if (v) {
+            var date = new Date(v)
+            var createDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+            setDate(createDate)
+        }
     }
 
     const handleSave = () => {
         const updateProduct = {
+            ...post,
             title: name,
             detected: date,
             description,
         }
         updatePost(updateProduct, post._id)
+        toast.warning("Item Updated!");
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000);
     }
 
     const handleDelete = (id) => {
@@ -36,12 +51,15 @@ const DisplayModal = () => {
         toast.error("Item Deleted!");
         setTimeout(() => {
             window.location.reload();
-        }, 3000);
+        }, 1000);
     }
 
     useEffect(() => {
         const findItem = posts.filter((item) => item._id === modal.id)[0]
         setPost(findItem)
+        setName(findItem?.title)
+        setDate(findItem?.detected)
+        setDescription(findItem?.description)
     }, [modal.id])
 
 
@@ -64,17 +82,14 @@ const DisplayModal = () => {
                                         placeholder="Name"
                                         size="md"
                                         id="edit-name"
-                                        onChange={(v) => setName(v)}
+                                        onChange={setName}
                                     />
                                     <p style={{ lineHeight: 3, paddingLeft: 5 }} >
                                         <small>{post?.object}</small>
                                     </p>
-                                    <Input
-                                        defaultValue={post?.detected}
-                                        placeholder="Date"
-                                        size="md"
-                                        id="edit-Date"
-                                        onChange={(v) => setDate(v)}
+                                    <DatePicker
+                                        placeholder={post?.detected}
+                                        onChange={dateHandler}
                                     />
                                     <p style={{ lineHeight: 3, paddingLeft: 5 }}>
                                         <small>{post?.color}</small>
@@ -92,7 +107,7 @@ const DisplayModal = () => {
                                 placeholder="description"
                                 size="lg"
                                 id="edit-Date"
-                                onChange={(v) => setDescription(v)}
+                                onChange={setDescription}
                             />
 
                         </Row>
@@ -169,14 +184,14 @@ const DisplayModal = () => {
             </Modal >
             <ToastContainer
                 position="top-center"
-                autoClose={3000}
+                autoClose={1000}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick
                 rtl={false}
                 pauseOnFocusLoss
                 draggable
-                pauseOnHover
+                pauseOnHover={false}
                 theme="dark"
             />
         </>
