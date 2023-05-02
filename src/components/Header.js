@@ -8,11 +8,17 @@ import {
   filterPostsAction,
   clearFilterPosts,
 } from "../redux/actions/PostActions";
-import { Button, CheckPicker, Input, DateRangePicker } from "rsuite";
+import { Button, CheckPicker, Input, InputGroup, DateRangePicker } from "rsuite";
 import { BiSearch } from "react-icons/bi";
 import { BsSun, BsFillMoonFill, BsSortDown, BsSortDownAlt } from "react-icons/bs";
 import { AiOutlineClear } from "react-icons/ai";
+import SearchIcon from '@rsuite/icons/Search';
 import "./Searchbar/Searchbar.css";
+
+const styles = {
+  width: 350,
+  marginBottom: 10
+};
 
 const Header = ({ search, setSearch, onChange, toggleTheme }) => {
   const [checkStatus, setCheckStatus] = useState(true)
@@ -72,17 +78,30 @@ const Header = ({ search, setSearch, onChange, toggleTheme }) => {
     }
   }
 
+  const clearHandler = () => {
+    dispatch(clearFilterPosts())
+    let clearChecked = document.querySelector(".rs-picker-check .rs-btn-close");
+    if (clearChecked) clearChecked.click();
+    let clearDateRange = document.querySelector(".rs-picker-daterange .rs-btn-close");
+    if (clearDateRange) clearDateRange.click()
+  }
+
   return (
     <header>
       <div className="head-bottom ">
         <div className="bottom-left">
-          <Input
-            placeholder="Filter..."
-            size="md"
-            id="search-box"
-            onChange={onChange}
-            className="searchHeader"
-          />
+          <InputGroup style={styles}>
+            <Input
+              placeholder="Filter..."
+              size="md"
+              id="search-box"
+              onChange={onChange}
+              className="searchHeader"
+            />
+            <InputGroup.Addon>
+              <SearchIcon />
+            </InputGroup.Addon>
+          </InputGroup>
         </div>
         <div className="bottom-right">
           <button type="button" onClick={toggleTheme} className="theme">
@@ -143,7 +162,7 @@ const Header = ({ search, setSearch, onChange, toggleTheme }) => {
             className="filterBtn"
             appearance="default"
             endIcon={<AiOutlineClear />}
-            onClick={(e) => dispatch(clearFilterPosts())}
+            onClick={clearHandler}
           >
             Clear
           </Button>

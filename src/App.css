@@ -34,6 +34,10 @@ body {
   width: 90%;
   margin: 0 auto;
 }
+.imgBox {
+  width: 272px;
+  height: 272px;
+}
 input {
   border: none;
   outline: none;
@@ -44,6 +48,15 @@ input {
 .rs-theme-dark header {
   border-bottom: 1px solid #333;
 }
+.modalAlertBody {
+  display: flex;
+  align-items: center;
+}
+
+.modalAlertBody p {
+  margin-left: 9px;
+  font-size: 16px;
+}
 
 /** START HEADER STYLE **/
 
@@ -53,7 +66,7 @@ header {
   flex-direction: column;
   border-bottom: 1px solid #e5e5ea;
   width: auto;
-  min-height: 112px;
+  min-height: 100px;
   overflow: hidden;
 }
 
@@ -74,8 +87,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 10px;
-  margin-top: 0;
+  margin-left: 10px;
 }
 .bottom-right {
   width: 5%;
@@ -175,6 +187,24 @@ header .search {
 .createPost .min-w-430 {
   min-width: 430px;
 }
+
+.required {
+  color: red;
+  font-size: 16px;
+  margin-left: 3px;
+  font-weight: 100;
+}
+.required svg {
+  transform: translateX(-20px);
+  color: transparent;
+}
+.popover {
+  transform: translateX(-17px);
+}
+
+.pointer {
+  cursor: unset !important;
+}
 .createPost .rs-btn-toolbar.rs-stack {
   justify-content: end;
 }
@@ -211,32 +241,33 @@ header .search {
 .toggleBtn button {
   z-index: 10;
   cursor: pointer;
-  /* border: 1px solid #252830; */
   border-radius: 50%;
   padding: 2px !important;
   transform: translate(10px, -100px);
-  /* background-color: #252830 !important; */
   width: 23px;
   height: 23px;
   outline: none !important;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 }
-
-.pagination {
-  justify-content: center;
+.errStyle {
+  color: #da3333;
+  border-radius: 4px;
+  border-top-left-radius: 0;
+  font-size: 12px;
+  transform: translateY(-10px);
+}
+.errInput {
+  border-color: #da3333 !important;
+}
+.tooltipCustom {
+  background-color: transparent !important;
+  border: 1px solid #da3333;
+  color: #da3333 !important;
+  border-radius: 4px;
 }
 .rs-theme-dark .page-link,
 .rs-theme-dark .page-item.disabled .page-link {
   background-color: #252830;
-}
-.light .page-link,
-.light .page-item.disabled .page-link {
-  background-color: #dadada;
-  color: #333;
-}
-.light .page-link:hover {
-  color: #333;
-  background-color: #eee !important;
 }
 .rs-theme-dark .page-link:hover {
   background-color: #42454d !important;
@@ -276,56 +307,39 @@ header .search {
 .rs-sidenav-default {
   color: #8a8a8a !important;
 }
-.rs-sidenav.rs-sidenav-default.rs-sidenav-collapse-out
-  .rs-sidenav-nav
-  > .rs-dropdown
-  .rs-dropdown-toggle
-  > .rs-icon:not(.rs-dropdown-toggle-caret),
-.rs-sidenav-nav > .rs-sidenav-item > .rs-icon:not(.rs-dropdown-toggle-caret) {
-  margin-left: 0 !important;
+.sidebar {
+  width: 260px;
 }
 .sidebar nav {
   height: 100%;
-  /* background-color: #1e1f26; */
   border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
 }
-.rs-sidenav-nav
-  > .rs-dropdown
-  .rs-dropdown-toggle
-  > .rs-icon:not(.rs-dropdown-toggle-caret),
-.rs-sidenav-nav > .rs-sidenav-item > .rs-icon:not(.rs-dropdown-toggle-caret) {
-  margin-left: 3px !important;
-  top: 18px !important;
+.rs-sidenav-collapse-out .rs-sidenav-item svg {
+  transform: translate(-35px, 3px);
 }
-.dashboardIcon.rs-sidenav-item.rs-sidenav-item-active {
-  padding-top: 30px;
-  padding-left: 40px;
-  padding-bottom: 35px;
+.rs-sidenav-collapse-out .dashboardIcon img {
+  transform: translateX(-45px);
 }
-.rs-sidenav.rs-sidenav-default.rs-sidenav-collapse-out .dashboardIcon p {
-  transform: translateX(25px);
+.dashboardIcon {
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+  padding-left: 56px;
+  overflow: hidden;
 }
-.rs-sidenav.rs-sidenav-default.rs-sidenav-collapse-in .dashboardIcon {
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 0;
-}
-.rs-sidenav.rs-sidenav-default.rs-sidenav-collapse-out
-  .dashboardIcon
-  .rs-sidenav-item-icon {
-  transform: translateX(-36px);
-  transition: all 0.5s ease-in-out !important;
-}
-.dashboardIcon .rs-sidenav-item-icon {
+.rs-sidenav-collapse-in .rs-sidenav-item svg {
   margin-right: 10px;
-  margin-left: 19px;
 }
+.rs-sidenav-collapse-in .rs-sidenav-item {
+  display: flex;
+  padding-top: 20px !important;
+}
+
 .page {
   justify-content: center;
 }
-.head .rs-panel-header {
-  padding-top: 5px;
+.sidebar hr {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 /* Modal Btn Style */

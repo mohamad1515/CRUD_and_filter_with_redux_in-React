@@ -7,9 +7,11 @@ import { FiTrash2, FiSave } from "react-icons/fi";
 import { CiEdit } from "react-icons/ci";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import RemindIcon from '@rsuite/icons/legacy/Remind';
 
 const DisplayModal = () => {
     const [post, setPost] = useState("")
+    const [alert, setAlert] = useState(false)
     const [changeStatus, setChangeStatus] = useState(false)
     const [name, setName] = useState("")
     const [date, setDate] = useState("")
@@ -22,6 +24,10 @@ const DisplayModal = () => {
         setName("")
         setDate("")
         setDescription("")
+    }
+
+    const handleExit = () => {
+        setAlert(false)
     }
 
     const dateHandler = (v) => {
@@ -150,7 +156,7 @@ const DisplayModal = () => {
                                     <span>Save</span>
                                     <FiSave className="saveIcon" />
                                 </Button>
-                                <Button onClick={() => handleDelete(post?._id)} appearance="subtle" className="remove">
+                                <Button onClick={() => setAlert(true)} appearance="subtle" className="remove">
                                     <span>Delete</span>
                                     <FiTrash2 className="removeIcon" />
                                 </Button>
@@ -180,8 +186,25 @@ const DisplayModal = () => {
 
                     </Modal.Footer>
                 )}
-
             </Modal >
+
+            <Modal size="xs" keyboard={false} open={alert} onClose={handleExit}>
+                <Modal.Header>
+                    <Modal.Title></Modal.Title>
+                </Modal.Header>
+                <Modal.Body className='modalAlertBody'>
+                    <RemindIcon style={{ color: '#ffb300', fontSize: 24 }} />
+                    <p>Are You Sure ?</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={() => handleDelete(post?._id)} appearance="primary">
+                        Yes
+                    </Button>
+                    <Button onClick={handleExit} appearance="subtle">
+                        No
+                    </Button>
+                </Modal.Footer>
+            </Modal>
             <ToastContainer
                 position="top-center"
                 autoClose={1000}

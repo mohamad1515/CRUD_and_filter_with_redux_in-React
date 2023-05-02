@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import Uploader from './Uploader/Uploader';
-import { Form, Input, ButtonToolbar, Button, SelectPicker, Panel, DatePicker, Grid, Row, Col } from 'rsuite';
-import "../App.css"
+import { Form, Input, ButtonToolbar, Button, SelectPicker, Panel, DatePicker, Grid, Row, Col, Tooltip, Whisper } from 'rsuite';
 import ED from '../assets/ed.jpg'
+import DefaultImg from '../assets/img.jpg'
 import { createPost } from 'src/services/FilterService';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import "../App.css"
 
+const tooltip = (
+    <Tooltip className='tooltipCustom'>
+        Please fill in the required field !
+    </Tooltip>
+);
+const regTitlePattern = /^[a-zA-Z]+$/;
 
 const color = [
     "Red",
@@ -46,13 +54,22 @@ const NewDate = React.forwardRef((props, ref) =>
 const FormPost = () => {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
-    const [detected, setDetected] = useState("")
+    const [image, setImage] = useState(DefaultImg)
+    const [detected, setDetected] = useState(new Date())
     const [object, setObject] = useState("")
     const [color, setColor] = useState("")
     const [vehicle, setVehicle] = useState("")
-    const [img, setImg] = useState("")
+    const { img } = useSelector((state) => state.PostReducers)
+    const [titleErr, setTitleErr] = useState(false);
 
-    console.log("img ", img)
+    const validateTitle = (value) => {
+        if (!regTitlePattern.test(value)) {
+            setTitleErr(true);
+        } else {
+            setTitleErr(false);
+        }
+        setTitle(value)
+    }
 
     const dateHandler = (v) => {
         if (v) {
@@ -62,20 +79,32 @@ const FormPost = () => {
         }
     }
 
-    const SendData = () => {
-        const createProduct = {
-            title,
-            detected,
-            description,
-            object,
-            color,
-            vehicle
+    const SendData = (s, e) => {
+        e.preventDefault()
+        if (!titleErr && title !== '' && detected !== '') {
+            const createProduct = {
+                title,
+                image: img,
+                detected,
+                description,
+                object,
+                color,
+                vehicle
+            }
+            createPost(createProduct)
+            toast.success("Item Created!");
+            setTimeout(() => {
+                setTitle("")
+                setImage(DefaultImg)
+                setDetected("")
+                setDescription("")
+                setObject("")
+                setColor("")
+                setVehicle("")
+                let closeBtn = document.querySelector(".date-control-form span.rs-picker-toggle-clean.rs-btn-close");
+                if (closeBtn) closeBtn.click();
+            }, 1000);
         }
-        createPost(createProduct)
-        toast.success("Item Created!");
-        setTimeout(() => {
-            window.location.reload();
-        }, 1000);
     }
 
     return (
@@ -83,73 +112,74 @@ const FormPost = () => {
             <Panel>
                 <Row>
                     <Col lg={12}>
-                        <Form layout="horizontal">
+                        <Form layout="horizontal" onSubmit={SendData}>
                             <Form.Group controlId="title">
-                                <Form.ControlLabel>Title</Form.ControlLabel>
+                                <Form.ControlLabel>Title<span className='required'>*<Form.HelpText className='popover' tooltip>Title is required</Form.HelpText></span></Form.ControlLabel>
                                 <Form.Control name="title"
-                                    onChange={setTitle}
-                                    className='min-w-430' />
+                                    onChange={(v) => validateTitle(v)}
+                                    value={title}
+                                    className={titleErr ? 'min-w-430 errInput' : 'min-w-430'} />
                             </Form.Group>
+                            {titleErr && <p className='errStyle'>Your Title is invalid</p>}
                             <Form.Group controlId="description">
                                 <Form.ControlLabel>Description</Form.ControlLabel>
                                 <Form.Control name="description" rows={5} accepter={Textarea}
-                                    onChange={(v) => setDescription(v)}
+                                    onChange={setDescription}
+                                    value={description}
                                     className='min-w-430' />
                             </Form.Group>
-                            <Uploader img={img} setImg={setImg} />
+                            <Uploader image={image} setImage={setImage} />
                             <Form.Group controlId="detected">
-                                <Form.ControlLabel>Detected</Form.ControlLabel>
+                                <Form.ControlLabel>Detected<span className='required'>*<Form.HelpText className='popover' tooltip>Detected is required</Form.HelpText></span></Form.ControlLabel>
                                 <Form.Control name="detected" accepter={NewDate}
+                                    className="date-control-form min-w-430 ml-0 "
                                     onChange={dateHandler}
-                                    className='min-w-430 ml-0' />
+                                />
                             </Form.Group>
                             <Form.Group controlId="object">
                                 <Form.ControlLabel>Object Type</Form.ControlLabel>
                                 <Form.Control name="object" accepter={NewObjectType}
                                     onChange={setObject}
-                                    className='min-w-430 ml-0' />
+                                    value={object}
+                                    className='min-w-430 ml-0 ' />
                             </Form.Group>
-                            {object === "vehicle" ? (
-                                <>
-                                    <Form.Group controlId="color">
-                                        <Form.ControlLabel>Color</Form.ControlLabel>
-                                        <Form.Control name="color"
-                                            accepter={NewColor}
-                                            onChange={setColor}
-                                            className='min-w-430 ml-0' />
-                                    </Form.Group>
-                                    <Form.Group controlId="vehicle">
-                                        <Form.ControlLabel>Vehicle Type</Form.ControlLabel>
-                                        <Form.Control name="vehicle"
-                                            accepter={NewVehicleType}
-                                            onChange={setVehicle}
-                                            className='min-w-430 ml-0'
-                                        />
-                                    </Form.Group>
-                                </>
-                            ) : null}
-                            {object === "bicycle" ? (
-                                <>
-                                    <Form.Group controlId="color">
-                                        <Form.ControlLabel>Color</Form.ControlLabel>
-                                        <Form.Control name="color"
-                                            accepter={NewColor}
-                                            onChange={setColor}
-                                            className='min-w-430 ml-0' />
-                                    </Form.Group>
-
-                                </>
-                            ) : null}
+                            <Form.Group controlId="color">
+                                <Form.ControlLabel>Color</Form.ControlLabel>
+                                <Form.Control name="color"
+                                    accepter={NewColor}
+                                    onChange={setColor}
+                                    value={color}
+                                    disabled={object !== "vehicle" && object !== "bicycle"}
+                                    className='min-w-430 ml-0 ' />
+                            </Form.Group>
+                            <Form.Group controlId="vehicle">
+                                <Form.ControlLabel>Vehicle Type</Form.ControlLabel>
+                                <Form.Control name="vehicle"
+                                    accepter={NewVehicleType}
+                                    onChange={setVehicle}
+                                    value={vehicle}
+                                    disabled={object !== "vehicle"}
+                                    className='min-w-430 ml-0 '
+                                />
+                            </Form.Group>
                             <Form.Group>
                                 <ButtonToolbar>
-                                    <Button appearance="primary" onClick={SendData}>Add</Button>
-                                    <Button appearance="default">Cancel</Button>
+                                    {!titleErr && title !== '' && detected !== '' ?
+                                        <Button appearance="primary" type='submit'>Add Post</Button>
+                                        :
+                                        <Whisper followCursor placement="bottom" controlId="control-id-hover"
+                                            trigger="hover" speaker={tooltip}>
+                                            <Button appearance="default" className='pointer'>Add Post</Button>
+                                        </Whisper>
+                                    }
+
+                                    {/* <Button appearance="default" onClick={validate}>validate</Button> */}
                                 </ButtonToolbar>
                             </Form.Group>
                         </Form>
                     </Col>
-                    <Col lg={12} style={{ padding: 0 }}>
-                        <img src={ED} alt="ed" width="120%" />
+                    <Col lg={12} style={{ padding: 0, maxHeight: 910, overflow: 'hidden' }}>
+                        <img src={ED} alt="ed" width="130%" />
                     </Col>
                 </Row>
             </Panel>

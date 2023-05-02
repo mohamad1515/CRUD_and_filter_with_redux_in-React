@@ -1,18 +1,36 @@
-import "./Uploader.css"
 import Upload from "../../assets/img.jpg"
 import { AiOutlinePlus } from "react-icons/ai";
+import { useDispatch } from 'react-redux';
+import { setImageCard } from 'src/redux/actions/PostActions';
+import "./Uploader.css"
 
+const Uploader = ({ image, setImage }) => {
+    const dispatch = useDispatch()
+    let base64String = "";
+    const handleChange = () => {
 
-const Uploader = ({ img, setImg }) => {
+        var file = document.querySelector(
+            'input[type=file]')['files'][0];
+        var reader = new FileReader();
+
+        reader.onload = function () {
+            base64String = reader.result.replace("data:", "")
+                .replace(/^.+,/, "");
+            setImage(reader.result);
+            dispatch(setImageCard(reader.result))
+
+        }
+        reader.readAsDataURL(file);
+    }
 
     return (
         <div className="userProfile">
             <div className="userImg">
-                <img src={img ? img : Upload} id="dropdown-basic-button" alt="logox" />
+                <img src={image ? image : Upload} id="dropdown-basic-button" alt="logox" />
                 <div className="uploadBox">
                     <label className="uploadBtn">
                         <AiOutlinePlus className="adminIcon" />
-                        <input type="file" className="uploadINputfile" onChange={setImg} />
+                        <input type="file" className="uploadINputfile" onChange={handleChange} />
                     </label>
                 </div>
             </div>

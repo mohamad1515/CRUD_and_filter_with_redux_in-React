@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { Sidenav, Nav } from "rsuite";
-import Search from "@rsuite/icons/legacy/Search";
-import Plus from "@rsuite/icons/legacy/Plus";
-import { FiSettings } from "react-icons/fi";
+import { BiSearch } from "react-icons/bi";
+import { RiPlayListAddFill } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { setPage } from "../redux/actions/PostActions"
+import Toonix from '../assets/toonix.png'
 
 const Sidebar = () => {
   const [expanded, setExpanded] = React.useState(true);
@@ -20,21 +20,17 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <Sidenav expanded={expanded}>
+        <Sidenav.Header className="dashboardIcon">
+          <img src={Toonix} alt="toonix" />
+        </Sidenav.Header>
+        <hr />
         <Sidenav.Body>
           <Nav activeKey={activeKey} onSelect={setActiveKey}>
-            <Nav.Item
-              eventKey="dashboard"
-              className="dashboardIcon"
-              icon={<FiSettings />}
-            >
-              <p>Dashboard</p>
-            </Nav.Item>
-            <hr />
-            <Nav.Item eventKey="search" icon={<Search />}>
+            <Nav.Item eventKey="search" icon={<BiSearch />} >
               Search
             </Nav.Item>
-            <Nav.Item eventKey="add" icon={<Plus />}>
-              Add Post
+            <Nav.Item eventKey="add" icon={<RiPlayListAddFill />}>
+              AddPost
             </Nav.Item>
           </Nav>
         </Sidenav.Body>

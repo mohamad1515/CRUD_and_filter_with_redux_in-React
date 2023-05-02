@@ -18,3 +18,4 @@ export const CLEAR_FILTER_POST_FIELDS = 'CLEAR_FILTER_POST_FIELDS'
 
 export const SET_PAGE = 'SET_PAGE'
 export const SET_MODAL = 'SET_MODAL'
+export const SET_IMAGE = 'SET_IMAGE'

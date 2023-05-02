@@ -1,4 +1,5 @@
 import * as actions from '../constants/PostConstants';
+import DefaultImg from '../../assets/img.jpg'
 
 import { FilterPostsInputModel } from '../../models'
 let filterPostsInputModel = new FilterPostsInputModel()
@@ -12,7 +13,8 @@ const initialState = {
 	modal: {
 		open: false,
 		id: 0
-	}
+	},
+	img: DefaultImg
 };
 
 export const PostReducers = (state = initialState, action) => {
@@ -97,6 +99,11 @@ export const PostReducers = (state = initialState, action) => {
 			return {
 				...state,
 				modal: action.payload
+			}
+		case actions.SET_IMAGE:
+			return {
+				...state,
+				img: action.payload
 			}
 		default:
 			return state;
