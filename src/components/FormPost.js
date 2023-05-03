@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import Uploader from './Uploader/Uploader';
 import { Form, Input, ButtonToolbar, Button, SelectPicker, Panel, DatePicker, Grid, Row, Col, Tooltip, Whisper } from 'rsuite';
-import ED from '../assets/ed.jpg'
+import IL from '../assets/ad.jpg'
+import ID from '../assets/sd.jpg'
 import DefaultImg from '../assets/img.jpg'
 import { createPost } from 'src/services/FilterService';
 import { ToastContainer, toast } from 'react-toastify';
@@ -14,7 +15,7 @@ const tooltip = (
         Please fill in the required field !
     </Tooltip>
 );
-const regTitlePattern = /^[a-zA-Z]+$/;
+const regTitlePattern = /^[a-zA-Z\s]+$/;
 
 const color = [
     "Red",
@@ -59,7 +60,7 @@ const FormPost = () => {
     const [object, setObject] = useState("")
     const [color, setColor] = useState("")
     const [vehicle, setVehicle] = useState("")
-    const { img } = useSelector((state) => state.PostReducers)
+    const { img, theme } = useSelector((state) => state.PostReducers)
     const [titleErr, setTitleErr] = useState(false);
 
     const validateTitle = (value) => {
@@ -110,7 +111,7 @@ const FormPost = () => {
     return (
         <Grid className='createPost'>
             <Panel>
-                <Row>
+                <Row style={{ display: "flex", alignItems: "center" }}>
                     <Col lg={12}>
                         <Form layout="horizontal" onSubmit={SendData}>
                             <Form.Group controlId="title">
@@ -179,7 +180,7 @@ const FormPost = () => {
                         </Form>
                     </Col>
                     <Col lg={12} style={{ padding: 0, maxHeight: 910, overflow: 'hidden' }}>
-                        <img src={ED} alt="ed" width="130%" />
+                        <img src={theme === "light" ? IL : ID} alt="ed" width="100%" />
                     </Col>
                 </Row>
             </Panel>

@@ -117,6 +117,7 @@ const Header = ({ search, setSearch, onChange, toggleTheme }) => {
         <div className="top-left">
           <DateRangePicker
             appearance="default"
+            placeholder="Select Date"
             onChange={(v) => dateHandler(v)}
             format="yyyy-MM-dd"
             style={{ width: 234 }}

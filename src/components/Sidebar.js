@@ -18,7 +18,7 @@ const Sidebar = () => {
   }, [activeKey])
 
   return (
-    <div className="sidebar">
+    <div style={{ width: expanded ? 260 : 50 }} className="sidebar">
       <Sidenav expanded={expanded}>
         <Sidenav.Header className="dashboardIcon">
           <img src={Toonix} alt="toonix" />

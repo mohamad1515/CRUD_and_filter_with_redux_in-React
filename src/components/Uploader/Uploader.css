@@ -13,6 +13,7 @@
 .userImg img {
   border: 1px dashed #fff;
   width: 175px;
+  height: 175px;
   object-fit: cover;
 }
 
