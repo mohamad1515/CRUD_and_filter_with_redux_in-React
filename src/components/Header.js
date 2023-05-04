@@ -51,6 +51,7 @@ const Header = ({ search, setSearch, onChange, toggleTheme }) => {
     if (sort === "ASC") {
       dispatch(sortPostsAsc());
     }
+    console.log("searchPosts ", search)
   }, [search, sort, dispatch]);
 
 
@@ -84,100 +85,105 @@ const Header = ({ search, setSearch, onChange, toggleTheme }) => {
     if (clearChecked) clearChecked.click();
     let clearDateRange = document.querySelector(".rs-picker-daterange .rs-btn-close");
     if (clearDateRange) clearDateRange.click()
+    setSearch("")
   }
 
   return (
-    <header>
-      <div className="head-bottom ">
-        <div className="bottom-left">
-          <InputGroup style={styles}>
-            <Input
-              placeholder="Filter..."
-              size="md"
-              id="search-box"
-              onChange={onChange}
-              className="searchHeader"
+    <>
+      <header>
+        <div className="head-bottom ">
+          <div className="bottom-left">
+            <InputGroup style={styles}>
+              <Input
+                value={search}
+                placeholder="Filter..."
+                size="md"
+                id="search-box"
+                onChange={onChange}
+                className="searchHeader"
+              />
+              <InputGroup.Addon>
+                <SearchIcon />
+              </InputGroup.Addon>
+            </InputGroup>
+          </div>
+          <div className="bottom-right">
+            <button type="button" onClick={toggleTheme} className="theme">
+              {window.localStorage.getItem("theme") === "dark" ? (
+                <BsSun />
+              ) : (
+                <BsFillMoonFill />
+              )}
+            </button>
+          </div>
+        </div>
+        <div className="head-top">
+          <div className="top-left">
+            <DateRangePicker
+              appearance="default"
+              placeholder="Select Date"
+              onChange={(v) => dateHandler(v)}
+              format="yyyy-MM-dd"
+              style={{ width: 234 }}
             />
-            <InputGroup.Addon>
-              <SearchIcon />
-            </InputGroup.Addon>
-          </InputGroup>
-        </div>
-        <div className="bottom-right">
-          <button type="button" onClick={toggleTheme} className="theme">
-            {window.localStorage.getItem("theme") === "dark" ? (
-              <BsSun />
-            ) : (
-              <BsFillMoonFill />
-            )}
-          </button>
-        </div>
-      </div>
-      <div className="head-top">
-        <div className="top-left">
-          <DateRangePicker
-            appearance="default"
-            placeholder="Select Date"
-            onChange={(v) => dateHandler(v)}
-            format="yyyy-MM-dd"
-            style={{ width: 234 }}
-          />
 
-          <CheckPicker
-            name="objects"
-            placeholder="Object Type"
-            data={object}
-            style={{ width: 234 }}
-            onChange={objectStatus}
-            onSelect={(v) => dispatch(setFilterPostField("objects", v))}
-          />
-          {!checkStatus &&
-            <>
-              <CheckPicker
-                name="colors"
-                placeholder="Color"
-                data={color}
-                style={{ width: 234 }}
-                onChange={(v) => dispatch(setFilterPostField("colors", v))}
-              />
-              <CheckPicker
-                name="vehicles"
-                placeholder="Vehicle Types"
-                data={type}
-                style={{ width: 234 }}
-                onChange={(v) => dispatch(setFilterPostField("vehicles", v))}
-              // disabled={checkStatus}
-              />
-            </>
-          }
-          <button type="button" className="sort ml-10">
-            {sort === "ASC" ? (
-              <BsSortDown onClick={() => setSort("DESC")} />
-            ) : (
-              <BsSortDownAlt onClick={() => setSort("ASC")} />
-            )}
-          </button>
+            <CheckPicker
+              name="objects"
+              placeholder="Object Type"
+              data={object}
+              style={{ width: 234 }}
+              onChange={objectStatus}
+              onSelect={(v) => dispatch(setFilterPostField("objects", v))}
+            />
+            {!checkStatus &&
+              <>
+                <CheckPicker
+                  name="colors"
+                  placeholder="Color"
+                  data={color}
+                  style={{ width: 234 }}
+                  onChange={(v) => dispatch(setFilterPostField("colors", v))}
+                />
+                <CheckPicker
+                  name="vehicles"
+                  placeholder="Vehicle Types"
+                  data={type}
+                  style={{ width: 234 }}
+                  onChange={(v) => dispatch(setFilterPostField("vehicles", v))}
+                // disabled={checkStatus}
+                />
+              </>
+            }
+            <button type="button" className="sort ml-10">
+              {sort === "ASC" ? (
+                <BsSortDown onClick={() => setSort("DESC")} />
+              ) : (
+                <BsSortDownAlt onClick={() => setSort("ASC")} />
+              )}
+            </button>
+          </div>
+          <div className="top-right">
+            <Button
+              className="filterBtn"
+              appearance="default"
+              endIcon={<AiOutlineClear />}
+              onClick={clearHandler}
+            >
+              Clear
+            </Button>
+            <Button
+              className="filterBtn blue"
+              appearance="primary"
+              endIcon={<BiSearch />}
+              onClick={(e) => dispatch(filterPostsAction())}
+            >
+              Search
+            </Button>
+          </div>
         </div>
-        <div className="top-right">
-          <Button
-            className="filterBtn"
-            appearance="default"
-            endIcon={<AiOutlineClear />}
-            onClick={clearHandler}
-          >
-            Clear
-          </Button>
-          <Button
-            className="filterBtn blue"
-            appearance="primary"
-            endIcon={<BiSearch />}
-            onClick={(e) => dispatch(filterPostsAction())}
-          >
-            Search
-          </Button>
-        </div>
-      </div>
-    </header>
+      </header>
+      <hr className="line" />
+    </>
   );
 };
 

@@ -6,7 +6,7 @@ import "./Uploader.css"
 
 const Uploader = ({ image, setImage }) => {
     const dispatch = useDispatch()
-    let base64String = "";
+    // let base64String = "";
     const handleChange = () => {
 
         var file = document.querySelector(
@@ -14,7 +14,8 @@ const Uploader = ({ image, setImage }) => {
         var reader = new FileReader();
 
         reader.onload = function () {
-            base64String = reader.result.replace("data:", "")
+            // base64String = 
+            reader.result.replace("data:", "")
                 .replace(/^.+,/, "");
             setImage(reader.result);
             dispatch(setImageCard(reader.result))
@@ -30,7 +31,7 @@ const Uploader = ({ image, setImage }) => {
                 <div className="uploadBox">
                     <label className="uploadBtn">
                         <AiOutlinePlus className="adminIcon" />
-                        <input type="file" className="uploadINputfile" onChange={handleChange} />
+                        <input accept="image/*" type="file" className="uploadINputfile" onChange={handleChange} />
                     </label>
                 </div>
             </div>

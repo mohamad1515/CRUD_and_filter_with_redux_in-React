@@ -12,13 +12,17 @@ import DisplayModal from "./DisplayModal";
 const Posts = () => {
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
-  const { posts, loading, searchResults, side } = useSelector((state) => state.PostReducers);
+  const { posts, loading, searchResults, side, searchRes } = useSelector((state) => state.PostReducers);
   const [currentPage, setCurrentPage] = useState(1);
   const [theme, toggleTheme] = useDarkMode();
 
   const handleChangeSearch = (v, e) => {
     if (v && v.length > 0) {
       setCurrentPage(1);
+      console.log("searchRes ", searchRes)
+
+    } else if (v?.length === 0) {
+      dispatch(filterPostsAction());
     }
     setSearch(v);
   };

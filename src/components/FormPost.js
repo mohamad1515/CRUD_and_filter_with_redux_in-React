@@ -79,6 +79,10 @@ const FormPost = () => {
             setDetected(createDate)
         }
     }
+    setTimeout(() => {
+        document.getElementById("detected").autocomplete = "off";
+    }, 500)
+
 
     const SendData = (s, e) => {
         e.preventDefault()

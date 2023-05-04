@@ -51,9 +51,9 @@ input {
 .rs-theme-dark hr {
   border-top: 1px solid #333 !important;
 }
-.rs-theme-dark header {
+/* .rs-theme-dark header {
   border-bottom: 1px solid #333;
-}
+} */
 .modalAlertBody {
   display: flex;
   align-items: center;
@@ -70,12 +70,44 @@ header {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  border-bottom: 1px solid #e5e5ea;
-  width: auto;
+  /* border-bottom: 1px solid #e5e5ea; */
+  width: 98%;
+  margin: 0 auto;
   min-height: 100px;
   overflow: hidden;
 }
-
+.line {
+  margin-top: 0 !important;
+}
+.head .rs-panel-body {
+  padding-left: 10px;
+}
+.edit .rs-panel-body {
+  padding: 0 10px 0px 0px;
+}
+.edit .rs-panel-body div,
+.edit .rs-panel-body input {
+  margin-bottom: 2px;
+}
+.head.read .rs-panel-body .rs-input {
+  margin-bottom: 2px;
+  cursor: default;
+  background: transparent;
+  border: none;
+}
+.areaRead .rs-input-lg {
+  cursor: default;
+  background: transparent;
+}
+.readOnly {
+  color: #ddd !important;
+}
+.head .rs-panel-header {
+  padding: 10px 15px !important;
+}
+.pl-5 {
+  padding-left: 5px !important;
+}
 .head-top {
   width: 100%;
   display: flex;
@@ -238,7 +270,7 @@ header .search {
   cursor: pointer;
 }
 .posts .post:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
   transition: all 0.3s;
 }
 

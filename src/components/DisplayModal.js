@@ -82,34 +82,27 @@ const DisplayModal = () => {
                                 <img src={post?.image} alt={post?.title} className="w-full" />
                             </Col>
                             <Col lg={12}>
-                                <Panel>
+                                <Panel className='edit'>
                                     <Input
                                         defaultValue={post?.title}
-                                        placeholder="Name"
+                                        placeholder="title"
                                         size="md"
-                                        id="edit-name"
                                         onChange={setName}
                                     />
-                                    <p style={{ lineHeight: 3, paddingLeft: 5 }} >
-                                        <small>{post?.object}</small>
-                                    </p>
                                     <DatePicker
                                         style={{ width: "100%", marginLeft: 0 }}
                                         placeholder={post?.detected}
                                         onChange={dateHandler}
                                     />
-                                    <p style={{ lineHeight: 3, paddingLeft: 5 }}>
-                                        <small>{post?.color}</small>
-                                    </p>
-                                    <p style={{ lineHeight: 1, paddingLeft: 5 }}>
-                                        <small>{post?.vehicle}</small>
-                                    </p>
+                                    {post?.object ? <Input disabled value={post?.object} className='readOnly' /> : null}
+                                    {post?.color ? <Input disabled value={post?.color} className='readOnly' /> : null}
+                                    {post?.vehicle ? <Input disabled value={post?.vehicle} className='readOnly' /> : null}
                                 </Panel>
                             </Col>
                         </Row>
-                        <Row className="p-10">
+                        <Row className="p-10 pl-5">
                             <Input
-                                as="textarea" rows={5}
+                                as="textarea" rows={7}
                                 defaultValue={post?.description}
                                 placeholder="description"
                                 size="lg"
@@ -125,24 +118,21 @@ const DisplayModal = () => {
                                 <img src={post?.image} alt={post?.title} className="w-full" />
                             </Col>
                             <Col lg={12}>
-                                <Panel header={post?.title} className="head">
-                                    <p>
-                                        <small>{post?.object}</small>
-                                    </p>
-                                    <p>
-                                        <small>{post?.detected}</small>
-                                    </p>
-                                    <p>
-                                        <small>{post?.color}</small>
-                                    </p>
-                                    <p>
-                                        <small>{post?.vehicle}</small>
-                                    </p>
+                                <Panel header={post?.title} className="head read">
+                                    <Input readOnly value={post?.detected} />
+                                    {post?.object ? <Input readOnly value={post?.object} /> : null}
+                                    {post?.color ? <Input readOnly value={post?.color} /> : null}
+                                    {post?.vehicle ? <Input readOnly value={post?.vehicle} /> : null}
                                 </Panel>
                             </Col>
                         </Row>
-                        <Row className="p-10">
-                            {post?.description}
+                        <Row className="p-10 pl-5 areaRead">
+                            <Input
+                                readOnly
+                                as="textarea" rows={7}
+                                value={post?.description}
+                                size="lg"
+                            />
                         </Row>
                     </Modal.Body>)}
 

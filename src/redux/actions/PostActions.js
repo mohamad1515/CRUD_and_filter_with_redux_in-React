@@ -60,6 +60,7 @@ export const searchPosts = (query) => (dispatch, getState) => {
 		post.title.toLowerCase().includes(query.toLowerCase())
 	);
 	dispatch({ type: actions.SEARCH_POSTS, payload: searchRes });
+	console.log("searchRes ", searchRes)
 }
 
 export const changeTheme = (theme) => (dispatch) => {
