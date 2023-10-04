@@ -6,6 +6,7 @@ let filterPostsInputModel = new FilterPostsInputModel()
 let filterPostsInputModelStr = JSON.stringify(filterPostsInputModel)
 const initialState = {
 	filterPostsInputModel: JSON.parse(filterPostsInputModelStr),
+	colors: [],
 	posts: [],
 	searchResults: [],
 	page: 1,
@@ -14,11 +15,30 @@ const initialState = {
 		open: false,
 		id: 0
 	},
-	img: DefaultImg
+	img: DefaultImg,
+	resultSearchPost: []
 };
 
 export const PostReducers = (state = initialState, action) => {
 	switch (action.type) {
+		case actions.FETCH_COLOR_REQUEST:
+			return {
+				...state,
+				loading: true,
+			};
+		case actions.FETCH_COLOR_SUCCESS:
+			return {
+				...state,
+				loading: false,
+				colors: action.payload,
+			};
+		case actions.FETCH_COLOR_FAILED:
+			return {
+				...state,
+				color: [],
+				loading: false,
+				error: action.payload,
+			};
 		case actions.FETCH_POST_REQUEST:
 			return {
 				...state,

@@ -4,7 +4,7 @@ import { BiSearch } from "react-icons/bi";
 import { RiPlayListAddFill } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { setPage } from "../redux/actions/PostActions"
-import Toonix from '../assets/toonix.png'
+import Logo from '../assets/logo2.png'
 
 const Sidebar = () => {
   const [expanded, setExpanded] = React.useState(true);
@@ -12,16 +12,15 @@ const Sidebar = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-
     dispatch(setPage(activeKey))
-
   }, [activeKey])
 
   return (
     <div style={{ width: expanded ? 260 : 50 }} className="sidebar">
       <Sidenav expanded={expanded}>
         <Sidenav.Header className="dashboardIcon">
-          <img src={Toonix} alt="toonix" />
+          <img src={Logo} alt="toonix" />
+          <p className="project">My Project</p>
         </Sidenav.Header>
         <hr />
         <Sidenav.Body>

@@ -1,6 +1,6 @@
 .userProfile,
 .editProfileDetails {
-  padding: 20px 30px 0;
+  padding: 40px 30px 0;
 }
 
 .userImg {
@@ -11,7 +11,7 @@
 }
 
 .userImg img {
-  border: 1px dashed #fff;
+  border: 2px dashed #dadada;
   width: 175px;
   height: 175px;
   object-fit: cover;
@@ -19,7 +19,7 @@
 
 .uploadBox {
   position: absolute;
-  top: -25px;
+  bottom: -25px;
   right: -25px;
 }
 
@@ -31,21 +31,29 @@
   position: absolute;
   z-index: -1;
 }
+.rs-theme-light .uploadBox {
+  background: #fff;
+  color: #ccc;
+  box-shadow: 1px 1px 7px #ccc;
+  border-radius: 50%;
+}
+.rs-theme-dark .uploadBox {
+  background: #06070a;
+  color: white;
+  box-shadow: 1px 1px 7px #404040;
+  border-radius: 50%;
+}
 
 .uploadBtn {
   width: 40px;
   height: 40px;
-  background: #fff;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   line-height: 0;
   font-size: 18px;
-  border: 1px solid white;
-  color: gray;
   cursor: pointer;
-  box-shadow: 1px 1px 7px #ccc;
   transition: all 0.3s ease;
 }
 

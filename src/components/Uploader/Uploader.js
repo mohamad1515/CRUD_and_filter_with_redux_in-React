@@ -1,4 +1,4 @@
-import Upload from "../../assets/img.jpg"
+import Upload from "../../assets/img.png"
 import { AiOutlinePlus } from "react-icons/ai";
 import { useDispatch } from 'react-redux';
 import { setImageCard } from 'src/redux/actions/PostActions';
@@ -21,7 +21,9 @@ const Uploader = ({ image, setImage }) => {
             dispatch(setImageCard(reader.result))
 
         }
-        reader.readAsDataURL(file);
+        if (file) {
+            reader.readAsDataURL(file);
+        }
     }
 
     return (

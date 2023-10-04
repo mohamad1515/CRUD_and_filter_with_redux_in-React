@@ -8,19 +8,19 @@ import { Pagination } from 'rsuite';
 import useDarkMode from "../hooks/dark-mode";
 import FormPost from "./FormPost"
 import DisplayModal from "./DisplayModal";
+import Not from '../assets/not.png'
 
 const Posts = () => {
   const [search, setSearch] = useState("");
+
   const dispatch = useDispatch();
-  const { posts, loading, searchResults, side, searchRes } = useSelector((state) => state.PostReducers);
+  const { posts, loading, searchResults, side, colors } = useSelector((state) => state.PostReducers);
   const [currentPage, setCurrentPage] = useState(1);
   const [theme, toggleTheme] = useDarkMode();
 
   const handleChangeSearch = (v, e) => {
     if (v && v.length > 0) {
       setCurrentPage(1);
-      console.log("searchRes ", searchRes)
-
     } else if (v?.length === 0) {
       dispatch(filterPostsAction());
     }
@@ -47,6 +47,7 @@ const Posts = () => {
               return (
                 <>
                   <Header
+                    colors={colors}
                     search={search}
                     setSearch={setSearch}
                     onChange={handleChangeSearch}
@@ -57,9 +58,14 @@ const Posts = () => {
                   ) : (
                     <div className="home">
                       <div className="posts">
-                        {filterPosts?.map((post) => (
-                          <PostCard key={post._id} post={post} />
-                        ))}
+                        {filterPosts.length === 0 ?
+                          <div className="not">
+                            <img src={Not} alt="notFound" width="100%" />
+                            <p>Not Found</p>
+                          </div> :
+                          filterPosts?.map((post) => (
+                            <PostCard key={post._id} post={post} />
+                          ))}
                       </div>
                       {searchResults >= postPerPage && (
                         <Pagination

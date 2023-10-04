@@ -7,6 +7,7 @@ import {
   setFilterPostField,
   filterPostsAction,
   clearFilterPosts,
+  fetchColors
 } from "../redux/actions/PostActions";
 import { Button, CheckPicker, Input, InputGroup, DateRangePicker } from "rsuite";
 import { BiSearch } from "react-icons/bi";
@@ -20,17 +21,10 @@ const styles = {
   marginBottom: 10
 };
 
-const Header = ({ search, setSearch, onChange, toggleTheme }) => {
+const Header = ({ search, setSearch, onChange, toggleTheme, colors }) => {
   const [checkStatus, setCheckStatus] = useState(true)
-  const color = [
-    "Red",
-    "White",
-    "Gray",
-    "Gold",
-    "Blue",
-    "Silver",
-    "Yellow",
-  ].map((item) => ({ label: item, value: item.toLowerCase() }));
+
+  const color = colors.map((item) => ({ label: item.charAt(0).toUpperCase() + item.slice(1), value: item }));
   const object = ["Person", "Bicycle", "Vehicle"].map((item) => ({
     label: item,
     value: item.toLowerCase(),
@@ -45,13 +39,13 @@ const Header = ({ search, setSearch, onChange, toggleTheme }) => {
 
   useEffect(() => {
     dispatch(searchPosts(search));
+    dispatch(fetchColors());
     if (sort === "DESC") {
       dispatch(sortPostsDesc());
     }
     if (sort === "ASC") {
       dispatch(sortPostsAsc());
     }
-    console.log("searchPosts ", search)
   }, [search, sort, dispatch]);
 
 

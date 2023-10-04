@@ -11,6 +11,7 @@ import RemindIcon from '@rsuite/icons/legacy/Remind';
 
 const DisplayModal = () => {
     const [post, setPost] = useState("")
+    const [relativeItem, setRelativeItem] = useState("")
     const [alert, setAlert] = useState(false)
     const [changeStatus, setChangeStatus] = useState(false)
     const [name, setName] = useState("")
@@ -18,6 +19,7 @@ const DisplayModal = () => {
     const [description, setDescription] = useState("")
     const dispatch = useDispatch()
     const { modal, posts } = useSelector((state) => state.PostReducers)
+
 
     const handleClose = () => {
         dispatch(setModal({ open: false, id: 0 }))
@@ -61,13 +63,18 @@ const DisplayModal = () => {
     }
 
     useEffect(() => {
-        const findItem = posts.filter((item) => item._id === modal.id)[0]
-        setPost(findItem)
-        setName(findItem?.title)
-        setDate(findItem?.detected)
-        setDescription(findItem?.description)
-    }, [modal.id])
+        try {
+            const findItem = posts?.filter((item) => item._id === modal.id)[0]
+            const findRelative = posts?.filter((item) => findItem.relative.includes(item._id))
+            setRelativeItem(findRelative)
+            setPost(findItem)
+            setName(findItem?.title)
+            setDate(findItem?.detected)
+            setDescription(findItem?.description)
+        } catch (error) {
+        }
 
+    }, [modal.id])
 
     return (
         <>
@@ -85,6 +92,7 @@ const DisplayModal = () => {
                                 <Panel className='edit'>
                                     <Input
                                         defaultValue={post?.title}
+                                        value={name}
                                         placeholder="title"
                                         size="md"
                                         onChange={setName}
@@ -97,6 +105,7 @@ const DisplayModal = () => {
                                     {post?.object ? <Input disabled value={post?.object} className='readOnly' /> : null}
                                     {post?.color ? <Input disabled value={post?.color} className='readOnly' /> : null}
                                     {post?.vehicle ? <Input disabled value={post?.vehicle} className='readOnly' /> : null}
+                                    {relativeItem?.length > 0 ? <Input disabled value={relativeItem?.map((item) => item.title)} className='readOnly' /> : null}
                                 </Panel>
                             </Col>
                         </Row>
@@ -119,10 +128,11 @@ const DisplayModal = () => {
                             </Col>
                             <Col lg={12}>
                                 <Panel header={post?.title} className="head read">
-                                    <Input readOnly value={post?.detected} />
+                                    {post?.detected ? <Input readOnly value={post?.detected} /> : null}
                                     {post?.object ? <Input readOnly value={post?.object} /> : null}
                                     {post?.color ? <Input readOnly value={post?.color} /> : null}
                                     {post?.vehicle ? <Input readOnly value={post?.vehicle} /> : null}
+                                    {relativeItem?.length > 0 ? <Input readOnly value={relativeItem?.map((item) => item.title)} /> : null}
                                 </Panel>
                             </Col>
                         </Row>

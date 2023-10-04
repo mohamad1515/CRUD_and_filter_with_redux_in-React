@@ -1,28 +1,16 @@
 import * as actions from '../constants/PostConstants';
-// import axios from 'axios';
+import axios from 'axios';
 import { filterPosts } from "../../services/FilterService";
 
-// export const fetchPosts = () => async (dispatch) => {
-// 	dispatch({ type: actions.FETCH_POST_REQUEST });
-// 	try {
-// 		const data = await axios.get("/api/products");
-// 		dispatch({ type: actions.FETCH_POST_SUCCESS, payload: data.data });
-// 	} catch (error) {
-// 		dispatch({ type: actions.FETCH_POST_FAILED, payload: error.message });
-// 		console.log(error.message);
-// 	}
-// }
-
-// export const fetchPostDetail = (id) => async (dispatch) => {
-// 	dispatch({ type: actions.FETCH_POST_DETAIL_REQUEST });
-// 	try {
-// 		const data = await axios.get(`/api/products/${id}`);
-// 		dispatch({ type: actions.FETCH_POST_DETAIL_SUCCESS, payload: data });
-// 	} catch (error) {
-// 		dispatch({ type: actions.FETCH_POST_DETAIL_FAILED, payload: error.message });
-// 		console.log(error.message);
-// 	}
-// }
+export const fetchColors = () => async (dispatch) => {
+	dispatch({ type: actions.FETCH_COLOR_REQUEST });
+	try {
+		const data = await axios.get("/api/colors");
+		dispatch({ type: actions.FETCH_COLOR_SUCCESS, payload: data.data.key });
+	} catch (error) {
+		dispatch({ type: actions.FETCH_COLOR_FAILED, payload: error.message });
+	}
+}
 
 export const setFilterPostField = (name, value) => (dispatch) => {
 	dispatch({ type: actions.SET_FILTER_POST_FIELD, payload: { name, value } });
@@ -54,13 +42,18 @@ export const sortPostsDesc = () => (dispatch, getState) => {
 	dispatch({ type: actions.SORT_POSTS_DESC, payload: PostReducers.posts });
 }
 
-export const searchPosts = (query) => (dispatch, getState) => {
+export const searchPosts = (query) => async (dispatch, getState) => {
 	const { PostReducers } = getState();
-	const searchRes = PostReducers.posts?.filter((post) =>
-		post.title.toLowerCase().includes(query.toLowerCase())
-	);
-	dispatch({ type: actions.SEARCH_POSTS, payload: searchRes });
-	console.log("searchRes ", searchRes)
+	const result = await filterPosts(PostReducers.filterPostsInputModel)
+	let searchRes = result.ok && result.data && result.data.records ? result.data.records : []
+	if (result.ok && result.data && result.data.records) {
+		searchRes = result?.data?.records?.filter((post) =>
+			post.title.toLowerCase().includes(query.toLowerCase())
+		);
+		dispatch({ type: actions.SEARCH_POSTS, payload: searchRes });
+	} else {
+		dispatch({ type: actions.SEARCH_POSTS, payload: [] });
+	}
 }
 
 export const changeTheme = (theme) => (dispatch) => {
