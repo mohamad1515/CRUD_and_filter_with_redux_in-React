@@ -1,0 +1,162 @@
+[
+  {
+    "_id": "1",
+    "title": "bill",
+    "image": "/images/person1.jpg",
+    "description": "good man",
+    "detected": "1994-04-04",
+    "object": "person",
+    "color": "",
+    "vehicle": ""
+  },
+  {
+    "_id": "2",
+    "title": "Elon Musk",
+    "image": "/images/person2.jpg",
+    "description": "Elon Reeve Musk FRS (born June 28, 1971) is a business magnate and investor. He is the founder, CEO and chief engineer of SpaceX; angel investor, CEO and product architect of Tesla, Inc.; owner and CEO of Twitter; founder of the Boring Company; co-founder of Neuralink and OpenAI; and president of the philanthropic Musk Foundation. With an estimated net worth of around $192 billion as of March 27, 2023, primarily from his ownership stakes in Tesla and SpaceX,[4][5] Musk is the second-wealthiest person in the world, according to both the Bloomberg Billionaires Index and Forbes's real-time billionaires list",
+    "detected": "2023-04-05",
+    "object": "person",
+    "color": "",
+    "vehicle": ""
+  },
+  {
+    "_id": "3",
+    "title": "Larry Page",
+    "image": "/images/person3.jpg",
+    "description": "Lawrence Edward (born March 26, 1973) is an American business magnate, computer scientist and internet entrepreneur. He is best known for co-founding Google with Sergey Brin",
+    "detected": "2023-04-10",
+    "object": "person",
+    "color": "",
+    "vehicle": ""
+  },
+  {
+    "_id": "4",
+    "title": "Jeff Bezos",
+    "image": "/images/person4.jpg",
+    "description": "Born in Albuquerque and raised in Houston and Miami, Bezos graduated from Princeton University in 1986. He holds a degree in electrical engineering and computer science. He worked on Wall Street in a variety of related fields from 1986 to early 1994. Bezos founded Amazon in late 1994 on a road trip from New York City to Seattle",
+    "detected": "2023-04-15",
+    "object": "person",
+    "color": "",
+    "vehicle": ""
+  },
+  {
+    "_id": "5",
+    "title": "Madone",
+    "image": "/images/bike1.jpg",
+    "description": "Madone SLR 9 AXS is ultralight, insanely fast, and super smooth. It's the ride you reach for on race day when every watt counts and your eyes are on the top step. This road race bike is built with an 800 Series OCLV Carbon frame and new IsoFlow technology that adds an aerodynamic advantage, cuts weight, and smooths the road ahead",
+    "detected": "2023-04-20",
+    "object": "bicycle",
+    "color": "blue",
+    "vehicle": ""
+  },
+  {
+    "_id": "6",
+    "title": "Domane",
+    "image": "/images/bike2.jpg",
+    "description": "Domane SLR 9 AXS is our top-of-the-line, ultralight carbon endurance road bike decked out with the best parts for a fast, high-performance ride. As an official Trek-Segafredo race team replica bike, you get our highest level OCLV Carbon frame with rear IsoSpeed, a wireless SRAM RED AXS electronic drivetrain for precision shifting",
+    "detected": "2023-04-24",
+    "object": "bicycle",
+    "color": "red",
+    "vehicle": ""
+  },
+  {
+    "_id": "7",
+    "title": "Rail",
+    "image": "/images/bike3.jpg",
+    "description": "Rail 9.9 is our best long-travel electric mountain bike. You get an extra-beefy carbon frame, unbelievably smooth RockShox suspension, SRAM's best wireless electronic drivetrain, and a powerful Bosch smart system Performance Line CX motor with an extra-long range",
+    "detected": "2023-04-25",
+    "object": "bicycle",
+    "color": "yellow",
+    "vehicle": ""
+  },
+  {
+    "_id": "8",
+    "title": "Domane+",
+    "image": "/images/bike4.jpg",
+    "description": "Domane+ SLR 9 is a category-redefining, high-speed assist carbon e-road bike that doesn't look, fit, or feel like a standard e-bike. It's built on an 800 Series OCLV Carbon frame that hides a compact and refined motor to elevate your ride with natural-feeling assist.",
+    "detected": "2023-04-30",
+    "object": "bicycle",
+    "color": "white",
+    "vehicle": ""
+  },
+  {
+    "_id": "9",
+    "title": "Chevrolet Colorado",
+    "image": "/images/car1.jpg",
+    "description": "The Colorado lineup will now feature greater differentiation from trim to trim and the addition of the new exterior paint color option available on the Z71 and ZR2 models. All Colorado variants will also include revised front Chevy emblems and embossed  tailgates in place of the traditional Chevy bowtie on the rear end of the vehicles",
+    "detected": "2023-05-01",
+    "object": "vehicle",
+    "color": "gray",
+    "vehicle": "truck"
+  },
+  {
+    "_id": "10",
+    "title": "Chevrolet Silverado",
+    "image": "/images/car2.jpg",
+    "description": "Chevrolet brings everything heavy-duty truck customers want and need with the 2024 Silverado HD - with no compromises in capability and comfort. The 2024 Silverado HD arrives with powertrain upgrades, a more commanding presence paired with an overhauled interior, enhancements to its revolutionary trailering technology, and infotainment and active safety technology upgrades",
+    "detected": "2023-05-05",
+    "object": "vehicle",
+    "color": "silver",
+    "vehicle": "truck"
+  },
+  {
+    "_id": "11",
+    "title": "Acura Integra",
+    "image": "/images/car3.jpg",
+    "description": "Featuring a high-revving four-cylinder engine producing a class-leading 320 horsepower, the new turbocharged Integra Type S is true to Acura's legacy of high-performance Integras and rich history of Type S performance variants. Standard hardware includes a turbocharged 2.0-liter VTEC® engine, class-exclusive 6-speed manual transmission, limited slip differential and performance-tuned Adaptive Damper System. Powerful Brembo® front brakes and lightweight 19-inch wheels wrapped in high-performance summer tires complete the dynamic package.",
+    "detected": "2023-05-05",
+    "object": "vehicle",
+    "color": "gold",
+    "vehicle": "sedan"
+  },
+  {
+    "_id": "12",
+    "title": "BMW 330e",
+    "image": "/images/car4.jpg",
+    "description": "A combination of peerless dynamics and exemplary efficiency defines the character of the new BMW 3-Series Sedan. And now the addition to the range of drive solutions of a plug-in hybrid system brings an extra, particularly future-focused angle to the new sports sedan's core attributes. The latest generation of BMW eDrive technology teams up with a four-cylinder petrol engine to significantly enhance the sporting prowess",
+    "detected": "2023-05-10",
+    "object": "vehicle",
+    "color": "gray",
+    "vehicle": "sedan"
+  },
+  {
+    "_id": "13",
+    "title": "Toyota Prius Prime",
+    "image": "/images/car5.jpg",
+    "description": "The 2023 Prius Prime is the multitalented plug-in hybrid that's made for life on the go. With a full charge, it can easily handle most daily commutes, with a manufacturer-estimated all electric range of up to 44 miles. When the longer-haul calls, its fuel-efficient hybrid powertrain is ready to keep going, with a manufacturer-estimated 52 MPG combined rating on the SE grade. Add in a sleek, sporty new look with a comfortable, tech-packed interior and it's an all-new Toyota Prius Prime that's ready for the road ahead.",
+    "detected": "2023-05-15",
+    "object": "vehicle",
+    "color": "white",
+    "vehicle": "sedan"
+  },
+  {
+    "_id": "14",
+    "title": "Nissan Versa",
+    "image": "/images/car6.jpg",
+    "description": "Following the introduction of an all-new Versa Note hatchback for the 2014 model year, the Versa Sedan receives an extensive makeover for 2015 - including new front and rear fascias, a range of interior refinements, and new grade level and packaging content.The starting price of $11,990 is unchanged, despite adding a refreshed exterior and interior along with standard Bluetooth® Hands-free Phone System.",
+    "detected": "2023-05-20",
+    "object": "vehicle",
+    "color": "blue",
+    "vehicle": "sedan"
+  },
+  {
+    "_id": "15",
+    "title": "Benz A35",
+    "image": "/images/car7.jpg",
+    "description": "Emotional, agile and digital: with the A35 4MATIC Mercedes-AMG is presenting a completely new entry-level model to the world of driving performance. It is based on the new Mercedes compact vehicle platform and is powered by a new 2.0-litre four-cylinder turbo engine with output of 225 kW (306 hp). Body shell, suspension",
+    "detected": "2023-05-25",
+    "object": "vehicle",
+    "color": "yellow",
+    "vehicle": "suv"
+  },
+  {
+    "_id": "16",
+    "title": "Ford Focus",
+    "image": "/images/car8.jpg",
+    "description": "A new iteration of Ford's design philosophy brings greater confidence and boldness to the Focus exterior, with a more distinctive approach to the Titanium, ST-Line and Active variants. Each gains unique styling elements that express their individual personalities, with an available X pack bringing a high specification and expanded Vignale pack availability delivering ultimate luxury and exclusive design features.",
+    "detected": "2023-05-31",
+    "object": "vehicle",
+    "color": "red",
+    "vehicle": "suv"
+  }
+]
